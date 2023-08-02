@@ -1,11 +1,11 @@
-<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script>/* 文章页背景 */
-.layout_post>#post {
-    /* 以下代表透明度为0.5 可以自行修改*/
-    background: rgba(255,255,255,.5);
-}
-
-/* 所有页面背景 */
-#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{
-    /* 以下代表透明度为0.5 */
-    background: rgba(255,255,255,.5);
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script>#web_bg {
+  /* 图片可下载上传到自己的图床也可以删掉*/
+  background-image: url("https://ae01.alicdn.com/kf/H5662031fbf344418aa2c8bf74c68826eV.png"),
+    -moz-linear-gradient(45deg, #6dd0f2 15%, #f59abe 85%);
+  background-image: url("https://ae01.alicdn.com/kf/H5662031fbf344418aa2c8bf74c68826eV.png"),
+    -webkit-linear-gradient(45deg, #6dd0f2 15%, #f59abe 85%);
+  background-image: url("https://ae01.alicdn.com/kf/H5662031fbf344418aa2c8bf74c68826eV.png"),
+    -ms-linear-gradient(45deg, #6dd0f2 15%, #f59abe 85%);
+  background-image: url("https://ae01.alicdn.com/kf/H5662031fbf344418aa2c8bf74c68826eV.png"),
+    linear-gradient(45deg, #6dd0f2 15%, #f59abe 85%);
 }
