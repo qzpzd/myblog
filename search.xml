@@ -19,8 +19,11 @@
 ]]></content>
   </entry>
   <entry>
-    <title>test</title>
+    <title>butterfly教程</title>
     <url>/myblog/2023/07/27/test/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script>]]></content>
+      <tags>
+        <tag>-butterfly -教程</tag>
+      </tags>
   </entry>
 </search>
