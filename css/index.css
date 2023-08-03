@@ -1366,7 +1366,7 @@ input::placeholder {
   z-index: -999;
   width: 100%;
   height: 100%;
-  background: url(https://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0eb30f2442a7d9331d42c348af4bd11373f00126.jpg);
+  background: url(/myblog/img/R-C.jpg);
   background-attachment: local;
   background-position: center;
   background-size: cover;
@@ -3205,13 +3205,6 @@ h1.page-title + .tag-cloud-list {
   background-attachment: scroll;
   background-position: bottom;
   background-size: cover;
-}
-#footer:before {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: var(--mark-bg);
-  content: '';
 }
 #footer-wrap {
   position: relative;
