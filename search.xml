@@ -21,8 +21,8 @@
   <entry>
     <title>butterfly教程</title>
     <url>/myblog/2023/07/27/test/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit lacus ut purus iaculis feugiat. Sed nec tempor elit, quis aliquam neque. Curabitur sed diam eget dolor fermentum semper at eu lorem.</p>
-</blockquote>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><div class="note"><p>flat</p></div>
+<p>默认 提示块标签</p>
 ]]></content>
       <tags>
         <tag>-butterfly -教程</tag>
