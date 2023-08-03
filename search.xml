@@ -21,8 +21,36 @@
   <entry>
     <title>butterfly教程</title>
     <url>/myblog/2023/07/27/test/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><div class="note"><p>flat</p></div>
-<p>默认 提示块标签</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><div class="note"><p>default</p></div>
+<p>default 提示标签块</p>
+<div class="note"></div>
+
+<div class="note"><p>primary</p></div>
+<p>primary 提示标签块</p>
+<div class="note"></div>
+
+<div class="note"><p>success</p></div>
+<p>success 提示标签块</p>
+<div class="note"></div>
+
+<div class="note"><p>info</p></div>
+<p>info 提示标签块</p>
+<div class="note"></div>
+
+<div class="note"><p>warning</p></div>
+<p>warning 提示标签块</p>
+<div class="note"></div>
+
+<div class="note"><p>danger</p></div>
+<p>danger 提示标签块</p>
+<div class="note"></div>
+
+
+
+
+
+
+
 ]]></content>
       <tags>
         <tag>-butterfly -教程</tag>
