@@ -6,7 +6,7 @@
   <link href="https://qzpzd.github.io/myblog/atom.xml" rel="self"/>
   
   <link href="https://qzpzd.github.io/myblog/"/>
-  <updated>2023-08-03T08:53:55.635Z</updated>
+  <updated>2023-08-03T09:36:34.696Z</updated>
   <id>https://qzpzd.github.io/myblog/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://qzpzd.github.io/myblog/2023/07/27/test/"/>
     <id>https://qzpzd.github.io/myblog/2023/07/27/test/</id>
     <published>2023-07-27T07:08:29.000Z</published>
-    <updated>2023-08-03T08:53:55.635Z</updated>
+    <updated>2023-08-03T09:36:34.696Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><div class="note"><p>default</p></div><p>default 提示标签块</p><div class="note"></div><div class="note"><p>primary</p></div><p>primary 提示标签块</p><div class="note"></div><div class="note"><p>success</p></div><p>success 提示标签块</p><div class="note"></div><div class="note"><p>info</p></div><p>info 提示标签块</p><div class="note"></div><div class="note"><p>warning</p></div><p>warning 提示标签块</p><div class="note"></div><div class="note"><p>danger</p></div><p>danger 提示标签块</p><div class="note"></div>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><div class="tabs" id="tab-tab"><ul class="nav-tabs"><li class="tab active"><a class="#tab-1">tab 1</a></li><li class="tab"><a class="#tab-2">tab 2</a></li><li class="tab"><a class="#tab-3">A</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-1"><p><strong>选项卡 1</strong> </p></div><div class="tab-pane" id="tab-2"><p><strong>选项卡 2</strong></p></div><div class="tab-pane" id="tab-3"><p><strong>选项卡 3</strong> 名字为A</p></div></div></div><div class="note info">这里是 info 标签样式</div><div class="note info no-icon">这里是不带符号的 info 标签样式</div><div class="note primary">这里是 primary 标签样式</div><div class="note primary no-icon">这里是不带符号的 primary 标签样式</div><div class="note warning">这里是 warning 标签样式</div><div class="note warning no-icon">这里是不带符号的 warning 标签样式</div><div class="note danger">这里是 danger 标签样式</div><div class="note danger no-icon">这里是不带符号的 danger 标签样式</div>]]></content>
     
     
     <summary type="html">对butterfly主题的简单配置介绍</summary>
