@@ -24,25 +24,23 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><h1 id="引用块"><a href="#引用块" class="headerlink" title="引用块"></a>引用块</h1><blockquote><p>content  </p>
 <footer><strong>author</strong><cite>- source [link] [source_link_title]</cite></footer></blockquote>
 
-<p>&#x2F;*</p>
+
 <blockquote>
 <p>引用内容</p>
 <blockquote>
 <p>引用内容</p>
 <blockquote>
-<p>yy内容<br>*&#x2F;</p>
+<p>yy内容</p>
 </blockquote>
 </blockquote>
 </blockquote>
-<h1 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h1><h2 id="分割线1："><a href="#分割线1：" class="headerlink" title="&#x2F;*分割线1： "></a>&#x2F;*<br>分割线1： </h2><p>分割线2：</p>
+<h1 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h1><h2 id="分割线1："><a href="#分割线1：" class="headerlink" title="分割线1： "></a>分割线1： </h2><p>分割线2：</p>
 <hr>
-<p>*&#x2F;</p>
 <h1 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h1><figure class="highlight plaintext"><figcaption><span>[title] [lang:language] [url] [link text]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">  <br>code snippet  <br></code></pre></td></tr></table></figure>  
 
+<h1 id="引用文章链接"><a href="#引用文章链接" class="headerlink" title="引用文章链接"></a>引用文章链接</h1><a href="/myblog/2023/07/27/hello-world/" title="Hello World">hello-world</a>
 
-<a href="/myblog/2023/07/27/hello-world/" title="Hello World">hello-world</a>
-
-<div class="tabs" id="tab-test4"><ul class="nav-tabs"><li class="tab active"><a class="#test4-1">第一个Tab</a></li><li class="tab"><a class="#test4-2"><i class="fab fa-apple-pay" style="text-align: center;"></i></a></li><li class="tab"><a class="#test4-3"><i class="fas fa-bomb"></i>炸弹</a></li></ul><div class="tab-content"><div class="tab-pane active" id="test4-1"><p><strong>tab名字为第一个Tab</strong></p></div><div class="tab-pane" id="test4-2"><p><strong>只有图标 没有Tab名字</strong></p></div><div class="tab-pane" id="test4-3"><p><strong>名字+icon</strong></p></div></div></div>
+<div class="tabs" id="tab-标签"><ul class="nav-tabs"><li class="tab active"><a class="#标签-1">标签 1</a></li><li class="tab"><a class="#标签-2">标签 2</a></li><li class="tab"><a class="#标签-3">标签三</a></li></ul><div class="tab-content"><div class="tab-pane active" id="标签-1"><p><strong>选项卡 1</strong> </p></div><div class="tab-pane" id="标签-2"><p><strong>选项卡 2</strong></p></div><div class="tab-pane" id="标签-3"><p><strong>选项卡 3</strong> , 名字为 <code>TAB三</code></p></div></div></div>
 
 <div class="gallery-group-main">
 
@@ -57,7 +55,14 @@
   
 </div>
 
-<p>&lt;!–swig￼5–&gt;</p>
+<p>{ % note success % }<br>一个 Success 提示<br>{ % endnote % }</p>
+<p>{ % note success 一个折叠的提示 % }<br>一个折叠的 Success 提示<br>{ % endnote % }</p>
+<p>{ % note default % }<br>一个 default 提示<br>{ % endnote % }</p>
+<p>{ % note primary % }<br>一个 primary 提示<br>{ % endnote % }</p>
+<p>{ % note success % }<br>一个 success 提示<br>{ % endnote % }</p>
+<p>{ % note info % }<br>一个 info 提示<br>{ % endnote % }</p>
+<p>{ % note warning % }<br>一个 warning 提示<br>{ % endnote % }</p>
+<p>{ % note danger % }<br>一个 danger 提示<br>{ % endnote % }</p>
 <div class="note info">这里是 info 标签样式</div>
 
 <div class="note info no-icon">这里是不带符号的 info 标签样式</div>
