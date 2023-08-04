@@ -21,9 +21,14 @@
   <entry>
     <title>butterfly教程</title>
     <url>/myblog/2023/07/27/test/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><h1 id="引用块"><a href="#引用块" class="headerlink" title="引用块"></a>引用块</h1><blockquote><p>content  </p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><h1 id="引用块"><a href="#引用块" class="headerlink" title="引用块"></a>引用块</h1><p>源代码</p>
+<figure class="highlight plaintext"><figcaption><span>[引用块]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">&lt;blockquote&gt;&lt;p&gt;content  &lt;/p&gt;<br>&lt;footer&gt;&lt;strong&gt;author&lt;/strong&gt;&lt;cite&gt;- source [link] [source_link_title]&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;<br></code></pre></td></tr></table></figure>
+
+<blockquote><p>content  </p>
 <footer><strong>author</strong><cite>- source [link] [source_link_title]</cite></footer></blockquote>
 
+<p>源代码</p>
+<figure class="highlight plaintext"><figcaption><span>[引用块]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext"><br>&gt;引用内容<br>&gt;&gt;引用内容<br>&gt;&gt;&gt;yy内容<br><br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>引用内容</p>
@@ -34,12 +39,29 @@
 </blockquote>
 </blockquote>
 </blockquote>
-<h1 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h1><hr>
-<h1 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h1><figure class="highlight plaintext"><figcaption><span>[title] [lang:language] [url] [link text]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">  <br>code snippet  <br></code></pre></td></tr></table></figure>  
+<h1 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h1><p>源代码</p>
+<figure class="highlight plaintext"><figcaption><span>[分割线]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext"><br>---<br><br></code></pre></td></tr></table></figure>
 
-<h1 id="引用文章链接"><a href="#引用文章链接" class="headerlink" title="引用文章链接"></a>引用文章链接</h1><a href="/myblog/2023/07/27/hello-world/" title="Hello World">hello-world</a>
+<hr>
+<h1 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h1><p>源代码</p>
+<figure class="highlight plaintext"><figcaption><span>[代码块]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext"><br>&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;figcaption&gt;&lt;span&gt;[title] [lang:language] [url] [link text]&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs plaintext&quot;&gt;  &lt;br&gt;code snippet  &lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;  <br><br></code></pre></td></tr></table></figure>
 
-<h1 id="选项卡"><a href="#选项卡" class="headerlink" title="选项卡"></a>选项卡</h1><div class="tabs" id="标签"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#标签-1">标签 1</button></li><li class="tab"><button type="button" data-href="#标签-2">标签 2</button></li><li class="tab"><button type="button" data-href="#标签-3">标签三</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="标签-1"><p><strong>选项卡 1</strong> </p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="标签-2"><p><strong>选项卡 2</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="标签-3"><p><strong>选项卡 3</strong> , 名字为 <code>TAB三</code></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<figure class="highlight plaintext"><figcaption><span>[title] [lang:language] [url] [link text]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">  <br>code snippet  <br></code></pre></td></tr></table></figure>  
+
+<h1 id="引用文章链接"><a href="#引用文章链接" class="headerlink" title="引用文章链接"></a>引用文章链接</h1><p>源代码</p>
+<figure class="highlight plaintext"><figcaption><span>[链接块]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext"><br>&lt;a href=&quot;/myblog/2023/07/27/hello-world/&quot; title=&quot;Hello World&quot;&gt;hello-world&lt;/a&gt; <br><br></code></pre></td></tr></table></figure>
+
+<a href="/myblog/2023/07/27/hello-world/" title="Hello World">hello-world</a>
+
+<h1 id="选项卡"><a href="#选项卡" class="headerlink" title="选项卡"></a>选项卡</h1><p>源代码</p>
+<figure class="highlight plaintext"><figcaption><span>[选项卡]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext"><br>&lt;div class=&quot;tabs&quot; id=&quot;标签&quot;&gt;&lt;ul class=&quot;nav-tabs&quot;&gt;&lt;li class=&quot;tab active&quot;&gt;&lt;button type=&quot;button&quot; data-href=&quot;#标签-1&quot;&gt;标签 1&lt;/button&gt;&lt;/li&gt;&lt;li class=&quot;tab&quot;&gt;&lt;button type=&quot;button&quot; data-href=&quot;#标签-2&quot;&gt;标签 2&lt;/button&gt;&lt;/li&gt;&lt;li class=&quot;tab&quot;&gt;&lt;button type=&quot;button&quot; data-href=&quot;#标签-3&quot;&gt;标签三&lt;/button&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&quot;tab-contents&quot;&gt;&lt;div class=&quot;tab-item-content active&quot; id=&quot;标签-1&quot;&gt;&lt;p&gt;&lt;strong&gt;选项卡 1&lt;/strong&gt; &lt;/p&gt;&lt;button type=&quot;button&quot; class=&quot;tab-to-top&quot; aria-label=&quot;scroll to top&quot;&gt;&lt;i class=&quot;fas fa-arrow-up&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;tab-item-content&quot; id=&quot;标签-2&quot;&gt;&lt;p&gt;&lt;strong&gt;选项卡 2&lt;/strong&gt;&lt;/p&gt;&lt;button type=&quot;button&quot; class=&quot;tab-to-top&quot; aria-label=&quot;scroll to top&quot;&gt;&lt;i class=&quot;fas fa-arrow-up&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;tab-item-content&quot; id=&quot;标签-3&quot;&gt;&lt;p&gt;&lt;strong&gt;选项卡 3&lt;/strong&gt; , 名字为 &lt;code&gt;TAB三&lt;/code&gt;&lt;/p&gt;&lt;button type=&quot;button&quot; class=&quot;tab-to-top&quot; aria-label=&quot;scroll to top&quot;&gt;&lt;i class=&quot;fas fa-arrow-up&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt; <br><br></code></pre></td></tr></table></figure>
+
+
+<div class="tabs" id="标签"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#标签-1">标签 1</button></li><li class="tab"><button type="button" data-href="#标签-2">标签 2</button></li><li class="tab"><button type="button" data-href="#标签-3">标签三</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="标签-1"><p><strong>选项卡 1</strong> </p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="标签-2"><p><strong>选项卡 2</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="标签-3"><p><strong>选项卡 3</strong> , 名字为 <code>TAB三</code></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+
+<p>源代码</p>
+<figure class="highlight plaintext"><figcaption><span>[选项卡]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext"><br>&lt;div class=&quot;gallery-group-main&quot;&gt;<br><br>  &lt;figure class=&quot;gallery-group&quot;&gt;<br>  &lt;img class=&quot;gallery-group-img no-lightbox&quot; src=&#x27;https://api.aqcoder.cntoday&#x27; alt=&quot;Group Image Gallery&quot;&gt;<br>  &lt;figcaption&gt;<br>  &lt;div class=&quot;gallery-group-name&quot;&gt;壁纸&lt;/div&gt;<br>  &lt;p&gt;收藏的一些壁纸&lt;/p&gt;<br>  &lt;a href=&#x27;/myblog/gallery/wallpaper/&#x27;&gt;&lt;/a&gt;<br>  &lt;/figcaption&gt;<br>  &lt;/figure&gt;<br>  <br>&lt;/div&gt;<br><br></code></pre></td></tr></table></figure>
 
 <div class="gallery-group-main">
 
@@ -54,10 +76,9 @@
   
 </div>
 
-	
-Hello {{ sensitive }}	
-	
 
+<h1 id="提示块"><a href="#提示块" class="headerlink" title="提示块"></a>提示块</h1><p>源代码</p>
+<figure class="highlight plaintext"><figcaption><span>[提示块]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext"><br>&lt;div class=&quot;note default simple&quot;&gt;&lt;p&gt;default 提示块&lt;/p&gt;<br>&lt;/div&gt;<br><br>&lt;div class=&quot;note primary simple&quot;&gt;&lt;p&gt;primary 提示块&lt;/p&gt;<br>&lt;/div&gt;<br><br>&lt;div class=&quot;note success simple&quot;&gt;&lt;p&gt;success 提示块&lt;/p&gt;<br>&lt;/div&gt;<br><br>&lt;div class=&quot;note info simple&quot;&gt;&lt;p&gt;info 提示块&lt;/p&gt;<br>&lt;/div&gt;<br><br>&lt;div class=&quot;note warning simple&quot;&gt;&lt;p&gt;warning 提示块&lt;/p&gt;<br>&lt;/div&gt;<br><br>&lt;div class=&quot;note danger simple&quot;&gt;&lt;p&gt;danger 提示块&lt;/p&gt;<br>&lt;/div&gt;<br><br></code></pre></td></tr></table></figure>
 
 <div class="note default simple"><p>default 提示块</p>
 </div>
