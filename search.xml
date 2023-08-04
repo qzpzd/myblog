@@ -59,7 +59,23 @@ Hello {{ sensitive }}	l/敏感内容被包装在中间
 	//敏感内容后加上这个
 
 
+<div class="note default simple"><p>default 提示块</p>
+</div>
 
+<div class="note primary simple"><p>primary 提示块</p>
+</div>
+
+<div class="note success simple"><p>success 提示块</p>
+</div>
+
+<div class="note info simple"><p>info 提示块</p>
+</div>
+
+<div class="note warning simple"><p>warning 提示块</p>
+</div>
+
+<div class="note danger simple"><p>danger 提示块</p>
+</div>
 
 <div class="note info">这里是 info 标签样式</div>
 
