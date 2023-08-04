@@ -39,7 +39,7 @@
 
 <h1 id="引用文章链接"><a href="#引用文章链接" class="headerlink" title="引用文章链接"></a>引用文章链接</h1><a href="/myblog/2023/07/27/hello-world/" title="Hello World">hello-world</a>
 
-<h1 id="选项卡"><a href="#选项卡" class="headerlink" title="选项卡"></a>选项卡</h1><div class="tabs" id="tab-标签"><ul class="nav-tabs"><li class="tab active"><a class="#标签-1">标签 1</a></li><li class="tab"><a class="#标签-2">标签 2</a></li><li class="tab"><a class="#标签-3">标签三</a></li></ul><div class="tab-content"><div class="tab-pane active" id="标签-1"><p><strong>选项卡 1</strong> </p></div><div class="tab-pane" id="标签-2"><p><strong>选项卡 2</strong></p></div><div class="tab-pane" id="标签-3"><p><strong>选项卡 3</strong> , 名字为 <code>TAB三</code></p></div></div></div>
+<h1 id="选项卡"><a href="#选项卡" class="headerlink" title="选项卡"></a>选项卡</h1><div class="tabs" id="标签"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#标签-1">标签 1</button></li><li class="tab"><button type="button" data-href="#标签-2">标签 2</button></li><li class="tab"><button type="button" data-href="#标签-3">标签三</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="标签-1"><p><strong>选项卡 1</strong> </p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="标签-2"><p><strong>选项卡 2</strong></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="标签-3"><p><strong>选项卡 3</strong> , 名字为 <code>TAB三</code></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
 
 <div class="gallery-group-main">
 
@@ -54,9 +54,9 @@
   
 </div>
 
-	//敏感内容前加上这个
-Hello {{ sensitive }}	l/敏感内容被包装在中间
-	//敏感内容后加上这个
+	
+Hello {{ sensitive }}	
+	
 
 
 <div class="note default simple"><p>default 提示块</p>
@@ -76,22 +76,6 @@ Hello {{ sensitive }}	l/敏感内容被包装在中间
 
 <div class="note danger simple"><p>danger 提示块</p>
 </div>
-
-<div class="note info">这里是 info 标签样式</div>
-
-<div class="note info no-icon">这里是不带符号的 info 标签样式</div>
-
-<div class="note primary">这里是 primary 标签样式</div>
-
-<div class="note primary no-icon">这里是不带符号的 primary 标签样式</div>
-
-<div class="note warning">这里是 warning 标签样式</div>
-
-<div class="note warning no-icon">这里是不带符号的 warning 标签样式</div>
-
-<div class="note danger">这里是 danger 标签样式</div>
-
-<div class="note danger no-icon">这里是不带符号的 danger 标签样式</div>
 
 
 
