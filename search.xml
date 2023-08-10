@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/myblog/2023/07/27/hello-world/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>decorator</title>
+    <url>/myblog/2023/08/10/decorator/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><h1 id="1、-timer-测量执行时间"><a href="#1、-timer-测量执行时间" class="headerlink" title="1、@timer:测量执行时间"></a>1、@timer:测量执行时间</h1><p>@timer装饰器可以帮助我们跟踪特定函数的执行时间。通过用这个装饰器包装函数，我可以快速识别瓶颈并优化代码的关键部分。</p>
+<figure class="highlight plaintext"><figcaption><span>[测量执行时间]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext"><br> import time<br> <br>def timer(func):<br>   def wrapper(*args, **kwargs):<br>       start_time = time.time()<br>       result = func(*args, **kwargs)<br>       end_time = time.time()<br>       print(f&quot;&#123;func.__name__&#125; took &#123;end_time - start_time:.2f&#125; seconds to execute.&quot;)<br>       return result<br>   return wrapper<br>@timer<br>def my_data_processing_function():<br>   # Your data processing code here<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="2-log-results-日志输出"><a href="#2-log-results-日志输出" class="headerlink" title="2.@log_results:日志输出"></a>2.@log_results:日志输出</h1><p>在运行复杂的数据分析时，跟踪每个函数的输出变得至关重要。@log_results装饰器可以帮助我们记录函数的结果，以便于调试和监控</p>
+<figure class="highlight plaintext"><figcaption><span>[日志输出]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext"><br>def log_results(func):<br>    def wrapper(*args, **kwargs):<br>        result = func(*args, **kwargs)<br>        with open(&quot;results.log&quot;, &quot;a&quot;) as log_file:<br>            log_file.write(f&quot;&#123;func.__name__&#125; - Result: &#123;result&#125;\n&quot;)<br>        return result<br> <br>    return wrapper<br> @log_results<br>def calculate_metrics(data):<br>   # Your metric calculation code here<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="3-suppress-errors-优雅的错误处理"><a href="#3-suppress-errors-优雅的错误处理" class="headerlink" title="3.@suppress_errors:优雅的错误处理"></a>3.@suppress_errors:优雅的错误处理</h1><p>@suppress_errors装饰器可以优雅地处理异常并继续执行,可以避免隐藏严重错误，还可以进行错误的详细输出，便于调试.</p>
+<figure class="highlight plaintext"><figcaption><span>[错误处理]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">def suppress_errors(func):<br>    def wrapper(*args, **kwargs):<br>        try:<br>            return func(*args, **kwargs)<br>        except Exception as e:<br>            print(f&quot;Error in &#123;func.__name__&#125;: &#123;e&#125;&quot;)<br>            return None<br> <br>    return wrapper<br>@suppress_errors<br>def preprocess_data(data):<br>   # Your data preprocessing code here<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="4-debug-调试变得更容易"><a href="#4-debug-调试变得更容易" class="headerlink" title="4.@debug:调试变得更容易"></a>4.@debug:调试变得更容易</h1><p>调试复杂的代码可能非常耗时。@debug装饰器可以打印函数的输入参数和它们的值，以便于调试:</p>
+<figure class="highlight plaintext"><figcaption><span>[调试]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">def debug(func):<br>    def wrapper(*args, **kwargs):<br>        print(f&quot;Debugging &#123;func.__name__&#125; - args: &#123;args&#125;, kwargs: &#123;kwargs&#125;&quot;)<br>        return func(*args, **kwargs)<br> <br>    return wrapper<br>@debug<br>def complex_data_processing(data, threshold=0.5):<br>   # Your complex data processing code here<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><figcaption><span>[引用链接]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">&lt;blockquote&gt;&lt;blockquote&gt;<br>&lt;p&gt;1.@timer:测量执行时间&lt;br&gt;2.@log_results:日志输出&lt;br&gt;3.@suppress_errors:优雅的错误处理&lt;br&gt;4.@debug:调试变得更容易&lt;/p&gt;<br>&lt;/blockquote&gt;<br>&lt;footer&gt;&lt;strong&gt;数据STUDIO&lt;/strong&gt;&lt;cite&gt;- source [https://mp.weixin.qq.com/s/JFaH_GqOFMARnzyWqV2TFQ] [10个简单但很有用的Python装饰器]&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;<br></code></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>-python -decorator</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>butterfly教程</title>
     <url>/myblog/2023/07/27/test/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><h1 id="引用块"><a href="#引用块" class="headerlink" title="引用块"></a>引用块</h1><p>源代码</p>
@@ -91,23 +129,5 @@
       <tags>
         <tag>-butterfly -教程</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/myblog/2023/07/27/hello-world/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
 </search>

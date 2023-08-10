@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>decorator | 两个世界的我</title><meta name="author" content="guzhongyue666"><meta name="copyright" content="guzhongyue666"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="1、@timer:测量执行时间@timer装饰器可以帮助我们跟踪特定函数的执行时间。通过用这个装饰器包装函数，我可以快速识别瓶颈并优化代码的关键部分。 [测量执行时间]123456789101112131415 import time def timer(func):   def wrapper(*args, **kwargs):       start_time &#x3D; time.time()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="decorator">
+<meta property="og:url" content="https://qzpzd.github.io/myblog/2023/08/10/decorator/index.html">
+<meta property="og:site_name" content="两个世界的我">
+<meta property="og:description" content="1、@timer:测量执行时间@timer装饰器可以帮助我们跟踪特定函数的执行时间。通过用这个装饰器包装函数，我可以快速识别瓶颈并优化代码的关键部分。 [测量执行时间]123456789101112131415 import time def timer(func):   def wrapper(*args, **kwargs):       start_time &#x3D; time.time()">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/08/10/qckoIznlQp4Ot69.jpg">
+<meta property="article:published_time" content="2023-08-10T06:51:35.000Z">
+<meta property="article:modified_time" content="2023-08-10T07:13:05.609Z">
+<meta property="article:author" content="guzhongyue666">
+<meta property="article:tag" content="-python -decorator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/08/10/qckoIznlQp4Ot69.jpg"><link rel="shortcut icon" href="/myblog/img/favicon.jpg"><link rel="canonical" href="https://qzpzd.github.io/myblog/2023/08/10/decorator/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/myblog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/myblog/',
+  algolia: undefined,
+  localSearch: {"path":"/myblog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'decorator',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-10 15:13:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/myblog//css/mycss.css"><style type="text/css">.aplayer.aplayer-narrow .aplayer-body{left: -66px !important;transition: left 1s;} .aplayer.aplayer-narrow .aplayer-body:hover{left: 0 !important;}</style><link rel="stylesheet" href="APlayer.min.css"><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/gh/radium-bit/res@master/live2d/autoload.js" async></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/myblog/atom.xml" title="两个世界的我" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/myblog/img/favicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/myblog/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/myblog/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/myblog/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/myblog/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myblog/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/myblog/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/myblog/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/myblog/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/08/10/qckoIznlQp4Ot69.jpg')"><nav id="nav"><span id="blog-info"><a href="/myblog/" title="两个世界的我"><span class="site-name">两个世界的我</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/myblog/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myblog/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/myblog/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/myblog/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/myblog/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">decorator</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-10T06:51:35.000Z" title="发表于 2023-08-10 14:51:35">2023-08-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-10T07:13:05.609Z" title="更新于 2023-08-10 15:13:05">2023-08-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="decorator"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/myblog/2023/08/10/decorator/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/myblog/2023/08/10/decorator/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1、-timer-测量执行时间"><a href="#1、-timer-测量执行时间" class="headerlink" title="1、@timer:测量执行时间"></a>1、@timer:测量执行时间</h1><p>@timer装饰器可以帮助我们跟踪特定函数的执行时间。通过用这个装饰器包装函数，我可以快速识别瓶颈并优化代码的关键部分。</p>
+<figure class="highlight plaintext"><figcaption><span>[测量执行时间]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"><br> import time<br> <br>def timer(func):<br>   def wrapper(*args, **kwargs):<br>       start_time = time.time()<br>       result = func(*args, **kwargs)<br>       end_time = time.time()<br>       print(f&quot;&#123;func.__name__&#125; took &#123;end_time - start_time:.2f&#125; seconds to execute.&quot;)<br>       return result<br>   return wrapper<br>@timer<br>def my_data_processing_function():<br>   # Your data processing code here<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="2-log-results-日志输出"><a href="#2-log-results-日志输出" class="headerlink" title="2.@log_results:日志输出"></a>2.@log_results:日志输出</h1><p>在运行复杂的数据分析时，跟踪每个函数的输出变得至关重要。@log_results装饰器可以帮助我们记录函数的结果，以便于调试和监控</p>
+<figure class="highlight plaintext"><figcaption><span>[日志输出]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"><br>def log_results(func):<br>    def wrapper(*args, **kwargs):<br>        result = func(*args, **kwargs)<br>        with open(&quot;results.log&quot;, &quot;a&quot;) as log_file:<br>            log_file.write(f&quot;&#123;func.__name__&#125; - Result: &#123;result&#125;\n&quot;)<br>        return result<br> <br>    return wrapper<br> @log_results<br>def calculate_metrics(data):<br>   # Your metric calculation code here<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="3-suppress-errors-优雅的错误处理"><a href="#3-suppress-errors-优雅的错误处理" class="headerlink" title="3.@suppress_errors:优雅的错误处理"></a>3.@suppress_errors:优雅的错误处理</h1><p>@suppress_errors装饰器可以优雅地处理异常并继续执行,可以避免隐藏严重错误，还可以进行错误的详细输出，便于调试.</p>
+<figure class="highlight plaintext"><figcaption><span>[错误处理]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">def suppress_errors(func):<br>    def wrapper(*args, **kwargs):<br>        try:<br>            return func(*args, **kwargs)<br>        except Exception as e:<br>            print(f&quot;Error in &#123;func.__name__&#125;: &#123;e&#125;&quot;)<br>            return None<br> <br>    return wrapper<br>@suppress_errors<br>def preprocess_data(data):<br>   # Your data preprocessing code here<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="4-debug-调试变得更容易"><a href="#4-debug-调试变得更容易" class="headerlink" title="4.@debug:调试变得更容易"></a>4.@debug:调试变得更容易</h1><p>调试复杂的代码可能非常耗时。@debug装饰器可以打印函数的输入参数和它们的值，以便于调试:</p>
+<figure class="highlight plaintext"><figcaption><span>[调试]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">def debug(func):<br>    def wrapper(*args, **kwargs):<br>        print(f&quot;Debugging &#123;func.__name__&#125; - args: &#123;args&#125;, kwargs: &#123;kwargs&#125;&quot;)<br>        return func(*args, **kwargs)<br> <br>    return wrapper<br>@debug<br>def complex_data_processing(data, threshold=0.5):<br>   # Your complex data processing code here<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><figcaption><span>[引用链接]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&lt;blockquote&gt;&lt;blockquote&gt;<br>&lt;p&gt;1.@timer:测量执行时间&lt;br&gt;2.@log_results:日志输出&lt;br&gt;3.@suppress_errors:优雅的错误处理&lt;br&gt;4.@debug:调试变得更容易&lt;/p&gt;<br>&lt;/blockquote&gt;<br>&lt;footer&gt;&lt;strong&gt;数据STUDIO&lt;/strong&gt;&lt;cite&gt;- source [https://mp.weixin.qq.com/s/JFaH_GqOFMARnzyWqV2TFQ] [10个简单但很有用的Python装饰器]&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;<br></code></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://qzpzd.github.io/myblog">guzhongyue666</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://qzpzd.github.io/myblog/2023/08/10/decorator/">https://qzpzd.github.io/myblog/2023/08/10/decorator/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://qzpzd.github.io/myblog" target="_blank">两个世界的我</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/myblog/tags/python-decorator/">-python -decorator</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/08/10/qckoIznlQp4Ot69.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/myblog/2023/07/27/test/" title="butterfly教程"><img class="cover" src="https://file.crazywong.com/gh/jerryc127/CDN/img/butterfly-docs-01-cover.png" onerror="onerror=null;src='/myblog/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">butterfly教程</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/myblog/img/favicon.jpg" onerror="this.onerror=null;this.src='/myblog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">guzhongyue666</div><div class="author-info__description">主要涉及机器学习、深度学习、目标检测、分割、激光雷达、人工智能、自动驾驶领域</div></div><div class="card-info-data site-data is-center"><a href="/myblog/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/myblog/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/myblog/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/qzpzd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/qzpzd" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:qzpzd1227@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_47709941?type=blog" target="_blank" title="Csdn"><i class="fas fa-copyright" style="color: #6495ED;"></i></a><a class="social-icon" href="https://www.cnblogs.com/qzpzd" target="_blank" title="Cnblogs"><i class="fas fa-blog" style="color: #800080;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81-timer-%E6%B5%8B%E9%87%8F%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4"><span class="toc-number">1.</span> <span class="toc-text">1、@timer:测量执行时间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-log-results-%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA"><span class="toc-number">2.</span> <span class="toc-text">2.@log_results:日志输出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-suppress-errors-%E4%BC%98%E9%9B%85%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">3.@suppress_errors:优雅的错误处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-debug-%E8%B0%83%E8%AF%95%E5%8F%98%E5%BE%97%E6%9B%B4%E5%AE%B9%E6%98%93"><span class="toc-number">4.</span> <span class="toc-text">4.@debug:调试变得更容易</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/myblog/2023/08/10/decorator/" title="decorator"><img src="https://s2.loli.net/2023/08/10/qckoIznlQp4Ot69.jpg" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="decorator"/></a><div class="content"><a class="title" href="/myblog/2023/08/10/decorator/" title="decorator">decorator</a><time datetime="2023-08-10T06:51:35.000Z" title="发表于 2023-08-10 14:51:35">2023-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2023/07/27/test/" title="butterfly教程"><img src="https://file.crazywong.com/gh/jerryc127/CDN/img/butterfly-docs-01-cover.png" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="butterfly教程"/></a><div class="content"><a class="title" href="/myblog/2023/07/27/test/" title="butterfly教程">butterfly教程</a><time datetime="2023-07-27T07:08:29.000Z" title="发表于 2023-07-27 15:08:29">2023-07-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/myblog/2023/07/27/hello-world/" title="Hello World">Hello World</a><time datetime="2023-07-27T07:06:35.903Z" title="发表于 2023-07-27 15:06:35">2023-07-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By guzhongyue666</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">与君共勉</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/myblog/js/utils.js"></script><script src="/myblog/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '37Qomll1H0CF832dRWKZEDeh-gzGzoHsz',
+      appKey: 'K4cMZGM3f3CllZ22vtRCTM52',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/myblog/js/myjs.js"></script><div class="aplayer no-destroy" data-id="697054881" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="true" > </div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/myblog/js/search/local-search.js"></script></div></div></body></html>
