@@ -2,45 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://qzpzd.github.io/myblog/2023/08/10/decorator/</loc>
+    <loc>https://qzpzd.github.io/myblog/2023/08/10/onnx_detect/</loc>
     
-    <lastmod>2023-08-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qzpzd.github.io/myblog/Gallery/index.html</loc>
-    
-    <lastmod>2023-08-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qzpzd.github.io/myblog/Gallery/Marvel/index.html</loc>
-    
-    <lastmod>2023-08-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qzpzd.github.io/myblog/Gallery/picture/index.html</loc>
-    
-    <lastmod>2023-08-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qzpzd.github.io/myblog/Gallery/wallpaper/index.html</loc>
-    
-    <lastmod>2023-08-05</lastmod>
+    <lastmod>2023-10-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -49,52 +13,25 @@
   <url>
     <loc>https://qzpzd.github.io/myblog/2023/07/27/test/</loc>
     
-    <lastmod>2023-08-05</lastmod>
+    <lastmod>2023-10-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://qzpzd.github.io/myblog/movies/index.html</loc>
+    <loc>https://qzpzd.github.io/myblog/2023/08/10/decorator/</loc>
     
-    <lastmod>2023-07-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qzpzd.github.io/myblog/music/index.html</loc>
-    
-    <lastmod>2023-07-28</lastmod>
+    <lastmod>2023-10-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://qzpzd.github.io/myblog/list/index.html</loc>
+    <loc>https://qzpzd.github.io/myblog/2023/10/09/hello-world/</loc>
     
-    <lastmod>2023-07-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qzpzd.github.io/myblog/about/index.html</loc>
-    
-    <lastmod>2023-07-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qzpzd.github.io/myblog/link/index.html</loc>
-    
-    <lastmod>2023-07-27</lastmod>
+    <lastmod>2023-10-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -103,7 +40,25 @@
   <url>
     <loc>https://qzpzd.github.io/myblog/categories/index.html</loc>
     
-    <lastmod>2023-07-27</lastmod>
+    <lastmod>2023-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://qzpzd.github.io/myblog/link/index.html</loc>
+    
+    <lastmod>2023-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://qzpzd.github.io/myblog/list/index.html</loc>
+    
+    <lastmod>2023-10-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -112,16 +67,70 @@
   <url>
     <loc>https://qzpzd.github.io/myblog/tags/index.html</loc>
     
-    <lastmod>2023-07-27</lastmod>
+    <lastmod>2023-10-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://qzpzd.github.io/myblog/2023/07/27/hello-world/</loc>
+    <loc>https://qzpzd.github.io/myblog/about/index.html</loc>
     
-    <lastmod>2023-07-27</lastmod>
+    <lastmod>2023-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://qzpzd.github.io/myblog/movies/index.html</loc>
+    
+    <lastmod>2023-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://qzpzd.github.io/myblog/music/index.html</loc>
+    
+    <lastmod>2023-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://qzpzd.github.io/myblog/Gallery/wallpaper/index.html</loc>
+    
+    <lastmod>2023-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://qzpzd.github.io/myblog/Gallery/index.html</loc>
+    
+    <lastmod>2023-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://qzpzd.github.io/myblog/Gallery/picture/index.html</loc>
+    
+    <lastmod>2023-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://qzpzd.github.io/myblog/Gallery/Marvel/index.html</loc>
+    
+    <lastmod>2023-10-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -130,22 +139,29 @@
 
   <url>
     <loc>https://qzpzd.github.io/myblog</loc>
-    <lastmod>2023-08-10</lastmod>
+    <lastmod>2023-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://qzpzd.github.io/myblog/tags/python-decorator/</loc>
-    <lastmod>2023-08-10</lastmod>
+    <loc>https://qzpzd.github.io/myblog/tags/butterfly-%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2023-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://qzpzd.github.io/myblog/tags/butterfly-%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2023-08-10</lastmod>
+    <loc>https://qzpzd.github.io/myblog/tags/python-decorator/</loc>
+    <lastmod>2023-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://qzpzd.github.io/myblog/tags/html-onnx-detect/</loc>
+    <lastmod>2023-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
