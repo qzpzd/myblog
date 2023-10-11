@@ -1,0 +1,290 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(一)yolov5检测头head魔改|针对小目标检测 | 两个世界的我</title><meta name="author" content="guzhongyue666"><meta name="copyright" content="guzhongyue666"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="1.YOLOv5算法简介 YOLOv5主要由输入端、Backone、Neck以及Prediction四部分组成。其中： (1) Backbone：在不同图像细粒度上聚合并形成图像特征的卷积神经网络。 (2) Neck：一系列混合和组合图像特征的网络层，并将图像特征传递到预测层。 (3) Head： 对图像特征进行预测，生成边界框和并预测类别。 检测框架：  2.原始YOLOv5模型 [原始]123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(一)yolov5检测头head魔改|针对小目标检测">
+<meta property="og:url" content="https://qzpzd.github.io/myblog/2023/10/11/yolov5_head/index.html">
+<meta property="og:site_name" content="两个世界的我">
+<meta property="og:description" content="1.YOLOv5算法简介 YOLOv5主要由输入端、Backone、Neck以及Prediction四部分组成。其中： (1) Backbone：在不同图像细粒度上聚合并形成图像特征的卷积神经网络。 (2) Neck：一系列混合和组合图像特征的网络层，并将图像特征传递到预测层。 (3) Head： 对图像特征进行预测，生成边界框和并预测类别。 检测框架：  2.原始YOLOv5模型 [原始]123">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png">
+<meta property="article:published_time" content="2023-10-11T06:51:35.000Z">
+<meta property="article:modified_time" content="2023-10-11T11:59:46.355Z">
+<meta property="article:author" content="guzhongyue666">
+<meta property="article:tag" content="-yolov5 -head">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png"><link rel="shortcut icon" href="/myblog/img/favicon.jpg"><link rel="canonical" href="https://qzpzd.github.io/myblog/2023/10/11/yolov5_head/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/myblog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/myblog/',
+  algolia: undefined,
+  localSearch: {"path":"/myblog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(一)yolov5检测头head魔改|针对小目标检测',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-11 19:59:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/myblog//css/mycss.css"><style type="text/css">.aplayer.aplayer-narrow .aplayer-body{left: -66px !important;transition: left 1s;} .aplayer.aplayer-narrow .aplayer-body:hover{left: 0 !important;}</style><link rel="stylesheet" href="APlayer.min.css"><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/gh/radium-bit/res@master/live2d/autoload.js" async></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async></script><meta name="generator" content="Hexo 7.0.0-rc2"><link rel="alternate" href="/myblog/atom.xml" title="两个世界的我" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/myblog/img/favicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/myblog/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/myblog/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/myblog/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/myblog/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myblog/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/myblog/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/myblog/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/myblog/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png')"><nav id="nav"><span id="blog-info"><a href="/myblog/" title="两个世界的我"><span class="site-name">两个世界的我</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/myblog/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myblog/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/myblog/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/myblog/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/myblog/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(一)yolov5检测头head魔改|针对小目标检测</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-11T06:51:35.000Z" title="发表于 2023-10-11 14:51:35">2023-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-11T11:59:46.355Z" title="更新于 2023-10-11 19:59:46">2023-10-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(一)yolov5检测头head魔改|针对小目标检测"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/myblog/2023/10/11/yolov5_head/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/myblog/2023/10/11/yolov5_head/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>1.YOLOv5算法简介</strong></p>
+<p>YOLOv5主要由输入端、Backone、Neck以及Prediction四部分组成。其中：</p>
+<p>(1) Backbone：在不同图像细粒度上聚合并形成图像特征的卷积神经网络。</p>
+<p>(2) Neck：一系列混合和组合图像特征的网络层，并将图像特征传递到预测层。</p>
+<p>(3) Head： 对图像特征进行预测，生成边界框和并预测类别。</p>
+<p>检测框架：</p>
+<p><img src="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png" alt="image.png"></p>
+<p><strong>2.原始YOLOv5模型</strong></p>
+<figure class="highlight plaintext"><figcaption><span>[原始]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># YOLOv5 head<br>head:<br>  [[-1, 1, Conv, [512, 1, 1]],<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]],<br>   [[-1, 6], 1, Concat, [1]],  # cat backbone P4<br>   [-1, 3, C3, [512, False]],  # 13<br><br>   [-1, 1, Conv, [256, 1, 1]],<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]],<br>   [[-1, 4], 1, Concat, [1]],  # cat backbone P3<br>   [-1, 3, C3, [256, False]],  # 17 (P3/8-small)<br><br>   [-1, 1, Conv, [256, 3, 2]],<br>   [[-1, 14], 1, Concat, [1]],  # cat head P4<br>   [-1, 3, C3, [512, False]],  # 20 (P4/16-medium)<br><br>   [-1, 1, Conv, [512, 3, 2]],<br>   [[-1, 10], 1, Concat, [1]],  # cat head P5<br>   [-1, 3, C3, [1024, False]],  # 23 (P5/32-large)<br><br>   [[17, 20, 23], 1, Detect, [nc, anchors]],  # Detect(P3, P4, P5)<br>  ]<br><br><br></code></pre></td></tr></table></figure>
+
+<p>若输入图像尺寸&#x3D;640X640，</p>
+<p>P3&#x2F;8 对应的检测特征图大小为80X80，用于检测大小在8X8以上的目标。</p>
+<p>P4&#x2F;16对应的检测特征图大小为40X40，用于检测大小在16X16以上的目标。</p>
+<p>P5&#x2F;32对应的检测特征图大小为20X20，用于检测大小在32X32以上的目标。</p>
+<p><strong>3.增加小目标检测层</strong></p>
+<figure class="highlight plaintext"><figcaption><span>[魔改]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"><br># parameters<br>nc: 1  # number of classes<br>depth_multiple: 0.33  # model depth multiple<br>width_multiple: 0.50  # layer channel multiple<br><br># anchors<br>anchors:<br>  - [5,6, 8,14, 15,11]  #4<br>  - [10,13, 16,30, 33,23]  # P3/8<br>  - [30,61, 62,45, 59,119]  # P4/16<br>  - [116,90, 156,198, 373,326]  # P5/32<br><br># YOLOv5 backbone<br>backbone:<br>  # [from, number, module, args]<br>  [[-1, 1, Focus, [64, 3]],  # 0-P1/2<br>   [-1, 1, Conv, [128, 3, 2]],  # 1-P2/4<br>   [-1, 3, BottleneckCSP, [128]],   #160*160<br>   [-1, 1, Conv, [256, 3, 2]],  # 3-P3/8<br>   [-1, 9, BottleneckCSP, [256]],  #80*80<br>   [-1, 1, Conv, [512, 3, 2]],  # 5-P4/16<br>   [-1, 9, BottleneckCSP, [512]], #40*40<br>   [-1, 1, Conv, [1024, 3, 2]],  # 7-P5/32<br>   [-1, 1, SPP, [1024, [5, 9, 13]]],<br>   [-1, 3, BottleneckCSP, [1024, False]],  # 9   20*20<br>  ]<br><br># YOLOv5 head<br>head:<br>  [[-1, 1, Conv, [512, 1, 1]],  #20*20<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]], #40*40<br>   [[-1, 6], 1, Concat, [1]],  # cat backbone P4  40*40<br>   [-1, 3, BottleneckCSP, [512, False]],  # 13     40*40<br><br>   [-1, 1, Conv, [512, 1, 1]], #40*40<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]],<br>   [[-1, 4], 1, Concat, [1]],  # cat backbone P3   80*80<br>   [-1, 3, BottleneckCSP, [512, False]],  # 17 (P3/8-small)  80*80<br><br>   [-1, 1, Conv, [256, 1, 1]], #18  80*80<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]], #19  160*160<br>   [[-1, 2], 1, Concat, [1]], #20 cat backbone p2  160*160<br>   [-1, 3, BottleneckCSP, [256, False]], #21 160*160<br><br>   [-1, 1, Conv, [256, 3, 2]],  #22   80*80<br>   [[-1, 18], 1, Concat, [1]], #23 80*80<br>   [-1, 3, BottleneckCSP, [256, False]], #24 80*80<br><br>   [-1, 1, Conv, [256, 3, 2]], #25  40*40<br>   [[-1, 14], 1, Concat, [1]],  # 26  cat head P4  40*40<br>   [-1, 3, BottleneckCSP, [512, False]],  # 27 (P4/16-medium) 40*40<br><br>   [-1, 1, Conv, [512, 3, 2]],  #28  20*20<br>   [[-1, 10], 1, Concat, [1]],  #29 cat head P5  #20*20<br>   [-1, 3, BottleneckCSP, [1024, False]],  # 30 (P5/32-large)  20*20<br><br>   [[21, 24, 27, 30], 1, Detect, [nc, anchors]],  # Detect(p2, P3, P4, P5)<br>  ]<br><br></code></pre></td></tr></table></figure>
+
+<p>上面的代码中根据不同yolov5版本进行适当修改，例如有的版本backbone第一行为[-1, 1, Conv, [64, 6, 2, 2]],  # 0-P1&#x2F;2，利用卷积取消了Focus，有些版本是C3替换了C2f，backbone第一行为[-1, 1, Conv, [64, 3, 2]]  # 0-P1&#x2F;2，其它yolo系列如yolov7与yolov8原理一样，之不过yolov5与yolov7许哟啊用到anchors，因此anchor也需要在原来基础上增加一个如上，yolov8则不需要，然后都是根据对应版本的原始yaml文件进行更改，只更改head部分即可。</p>
+<p><strong># 新增加160X160的检测特征图，用于检测4X4以上的目标。</strong></p>
+<p>改进后，虽然计算量和检测速度有所增加，但对小目标的检测精度有明显改善。</p>
+<p>这里给出其它yolov7与yolov8魔改的链接</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_70388905/article/details/125392908">YOLOv8&#x2F;YOLOv7&#x2F;YOLOv5系列算法改进【NO.6】增加小目标检测层，提高对小目标的检测效果_yolov5添加小目标检测层_人工智能算法研究院的博客-CSDN博客</a></p>
+<p>anchor重新聚类方法<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37541097/article/details/119647026">https://blog.csdn.net/qq_37541097/article/details/119647026</a></p>
+<p>yolov5中聚类anchors代码讲解<br>如果你是直接使用yolov5的训练脚本，那么它会自动去计算下默认的anchors与你数据集中所有目标的best possible recall，如果小于0.98就会根据你自己数据集的目标去重新聚类生成anchors，反之使用默认的anchors。</p>
+<p>下面代码是我根据yolov5中聚类anchors的代码简单修改得到的。基本流程不变，主要改动了三点：1.对代码做了些简化。2.把使用pytorch的地方都改成了numpy（感觉这样会更通用点，但numpy效率确实没有pytorch高）。3.作者默认使用的k-means方法是scipy包提供的，使用的是欧式距离。我自己改成了基于1-IOU(bboxes, anchors)距离的方法。当然我只是注释掉了作者原来的方法，如果想用自己把注释取消掉就行了。但在我使用测试过程中，还是基于1-IOU(bboxes, anchors)距离的方法会略好点。</p>
+<p>完整代码链接：<br><a target="_blank" rel="noopener" href="https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/others_project/kmeans_anchors">https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/others_project/kmeans_anchors</a></p>
+<p>其实在yolov5生成anchors中不仅仅使用了k-means聚类，还使用了Genetic Algorithm遗传算法，在k-means聚类的结果上进行mutation变异。接下来简单介绍下代码流程：</p>
+<p>读取训练集中每张图片的wh以及所有bboxes的wh（这里是我自己写的脚本读取的PASCAL VOC数据）<br>将每张图片中wh的最大值等比例缩放到指定大小img_size，由于读取的bboxes是相对坐标所以不需要改动<br>将bboxes从相对坐标改成绝对坐标（乘以缩放后的wh）<br>筛选bboxes，保留wh都大于等于两个像素的bboxes<br>使用k-means聚类得到n个anchors<br>使用遗传算法随机对anchors的wh进行变异，如果变异后效果变得更好（使用anchor_fitness方法计算得到的fitness（适应度）进行评估）就将变异后的结果赋值给anchors，如果变异后效果变差就跳过，默认变异1000次。<br>将最终变异得到的anchors按照面积进行排序并返回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">import random<br>import numpy as np<br>from tqdm import tqdm<br>from scipy.cluster.vq import kmeans<br><br>from read_voc import VOCDataSet<br>from yolo_kmeans import k_means, wh_iou<br><br><br>def anchor_fitness(k: np.ndarray, wh: np.ndarray, thr: float):  # mutation fitness<br>    r = wh[:, None] / k[None]<br>    x = np.minimum(r, 1. / r).min(2)  # ratio metric<br>    # x = wh_iou(wh, k)  # iou metric<br>    best = x.max(1)<br>    f = (best * (best &gt; thr).astype(np.float32)).mean()  # fitness<br>    bpr = (best &gt; thr).astype(np.float32).mean()  # best possible recall<br>    return f, bpr<br><br><br>def main(img_size=512, n=9, thr=0.25, gen=1000):<br>    # 从数据集中读取所有图片的wh以及对应bboxes的wh<br>    dataset = VOCDataSet(voc_root=&quot;/data&quot;, year=&quot;2012&quot;, txt_name=&quot;train.txt&quot;)<br>    im_wh, boxes_wh = dataset.get_info()<br><br>    # 最大边缩放到img_size<br>    im_wh = np.array(im_wh, dtype=np.float32)<br>    shapes = img_size * im_wh / im_wh.max(1, keepdims=True)<br>    wh0 = np.concatenate([l * s for s, l in zip(shapes, boxes_wh)])  # wh<br><br>    # Filter 过滤掉小目标<br>    i = (wh0 &lt; 3.0).any(1).sum()<br>    if i:<br>        print(f&#x27;WARNING: Extremely small objects found. &#123;i&#125; of &#123;len(wh0)&#125; labels are &lt; 3 pixels in size.&#x27;)<br>    wh = wh0[(wh0 &gt;= 2.0).any(1)]  # 只保留wh都大于等于2个像素的box<br><br>    # Kmeans calculation<br>    # print(f&#x27;Running kmeans for &#123;n&#125; anchors on &#123;len(wh)&#125; points...&#x27;)<br>    # s = wh.std(0)  # sigmas for whitening<br>    # k, dist = kmeans(wh / s, n, iter=30)  # points, mean distance<br>    # assert len(k) == n, print(f&#x27;ERROR: scipy.cluster.vq.kmeans requested &#123;n&#125; points but returned only &#123;len(k)&#125;&#x27;)<br>    # k *= s<br>    k = k_means(wh, n)<br><br>    # 按面积排序<br>    k = k[np.argsort(k.prod(1))]  # sort small to large<br>    f, bpr = anchor_fitness(k, wh, thr)<br>    print(&quot;kmeans: &quot; + &quot; &quot;.join([f&quot;[&#123;int(i[0])&#125;, &#123;int(i[1])&#125;]&quot; for i in k]))<br>    print(f&quot;fitness: &#123;f:.5f&#125;, best possible recall: &#123;bpr:.5f&#125;&quot;)<br><br>    # Evolve<br>    # 遗传算法(在kmeans的结果基础上变异mutation)<br>    npr = np.random<br>    f, sh, mp, s = anchor_fitness(k, wh, thr)[0], k.shape, 0.9, 0.1  # fitness, generations, mutation prob, sigma<br>    pbar = tqdm(range(gen), desc=f&#x27;Evolving anchors with Genetic Algorithm:&#x27;)  # progress bar<br>    for _ in pbar:<br>        v = np.ones(sh)<br>        while (v == 1).all():  # mutate until a change occurs (prevent duplicates)<br>            v = ((npr.random(sh) &lt; mp) * random.random() * npr.randn(*sh) * s + 1).clip(0.3, 3.0)<br>        kg = (k.copy() * v).clip(min=2.0)<br>        fg, bpr = anchor_fitness(kg, wh, thr)<br>        if fg &gt; f:<br>            f, k = fg, kg.copy()<br>            pbar.desc = f&#x27;Evolving anchors with Genetic Algorithm: fitness = &#123;f:.4f&#125;&#x27;<br><br>    # 按面积排序<br>    k = k[np.argsort(k.prod(1))]  # sort small to large<br>    print(&quot;genetic: &quot; + &quot; &quot;.join([f&quot;[&#123;int(i[0])&#125;, &#123;int(i[1])&#125;]&quot; for i in k]))<br>    print(f&quot;fitness: &#123;f:.5f&#125;, best possible recall: &#123;bpr:.5f&#125;&quot;)<br><br><br>if __name__ == &quot;__main__&quot;:<br>    main()<br><br></code></pre></td></tr></table></figure>
+
+
+<h1 id="聚类anchors需要注意的坑"><a href="#聚类anchors需要注意的坑" class="headerlink" title="聚类anchors需要注意的坑"></a>聚类anchors需要注意的坑</h1><p>有时使用自己聚类得到的anchors的效果反而变差了，此时你可以从以下几方面进行检查：</p>
+<p>注意输入网络时训练的图片尺寸。这是个很重要的点，因为一般训练&#x2F;验证时输入网络的图片尺寸是固定的，比如说640x640，那么图片在输入网络前一般会将最大边长缩放到640，同时图片中的bboxes也会进行缩放。所以在聚类anchors时需要使用相同的方式提前去缩放bboxes，否则聚类出来的anchors并不匹配。比如你的图片都是1280x1280大小的，假设bboxes都是100x100大小的，如果不去缩放bboxes，那么聚类得到的anchors差不多是在100x100附近。而实际训练网络时bboxes都已经缩放到50x50大小了，此时理想的anchors应该是50x50左右而不是100x100了。<br>如果使用预训练权重，不要冻结太多的权重。现在训练自己数据集时一般都是使用别人在coco等大型数据上预训练好的权重。而这些权重是基于coco等数据集上聚类得到的结果，并不是针对自己数据集聚类得到的。所以网络为了要适应新的anchors需要调整很多权重，如果你冻结了很多层（假设只去微调最后的预测器，其他权重全部冻结），那么得到的结果很大几率还没有之前的anchors好。当可训练的权重越来越多，一般使用自己数据集聚类得到的anchors会更好一点（前提是自己聚类的anchors是合理的）。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://qzpzd.github.io/myblog">guzhongyue666</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://qzpzd.github.io/myblog/2023/10/11/yolov5_head/">https://qzpzd.github.io/myblog/2023/10/11/yolov5_head/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://qzpzd.github.io/myblog" target="_blank">两个世界的我</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/myblog/tags/yolov5-head/">-yolov5 -head</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/myblog/2023/10/11/yolov5_head_BiFFPN/" title="(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点"><img class="cover" src="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png" onerror="onerror=null;src='/myblog/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点</div></div></a></div><div class="next-post pull-right"><a href="/myblog/2023/10/09/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/myblog/img/favicon.jpg" onerror="this.onerror=null;this.src='/myblog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">guzhongyue666</div><div class="author-info__description">主要涉及机器学习、深度学习、目标检测、分割、激光雷达、人工智能、自动驾驶领域</div></div><div class="card-info-data site-data is-center"><a href="/myblog/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/myblog/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/myblog/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/qzpzd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/qzpzd" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:qzpzd1227@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_47709941?type=blog" target="_blank" title="Csdn"><i class="fas fa-copyright" style="color: #6495ED;"></i></a><a class="social-icon" href="https://www.cnblogs.com/qzpzd" target="_blank" title="Cnblogs"><i class="fas fa-blog" style="color: #800080;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%81%9A%E7%B1%BBanchors%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9D%91"><span class="toc-number">1.</span> <span class="toc-text">聚类anchors需要注意的坑</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/myblog/2023/10/11/yolov5_head_BiFFPN/" title="(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点"><img src="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点"/></a><div class="content"><a class="title" href="/myblog/2023/10/11/yolov5_head_BiFFPN/" title="(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点">(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点</a><time datetime="2023-10-11T10:12:35.000Z" title="发表于 2023-10-11 18:12:35">2023-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2023/10/11/yolov5_head/" title="(一)yolov5检测头head魔改|针对小目标检测"><img src="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="(一)yolov5检测头head魔改|针对小目标检测"/></a><div class="content"><a class="title" href="/myblog/2023/10/11/yolov5_head/" title="(一)yolov5检测头head魔改|针对小目标检测">(一)yolov5检测头head魔改|针对小目标检测</a><time datetime="2023-10-11T06:51:35.000Z" title="发表于 2023-10-11 14:51:35">2023-10-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/myblog/2023/10/09/hello-world/" title="Hello World">Hello World</a><time datetime="2023-10-09T11:05:01.773Z" title="发表于 2023-10-09 19:05:01">2023-10-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2023/08/10/onnx_detect/" title="onnx模型和手动生成anchors文件进行后处理与测试"><img src="https://s2.loli.net/2023/08/10/qckoIznlQp4Ot69.jpg" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="onnx模型和手动生成anchors文件进行后处理与测试"/></a><div class="content"><a class="title" href="/myblog/2023/08/10/onnx_detect/" title="onnx模型和手动生成anchors文件进行后处理与测试">onnx模型和手动生成anchors文件进行后处理与测试</a><time datetime="2023-08-10T06:51:35.000Z" title="发表于 2023-08-10 14:51:35">2023-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2023/08/10/decorator/" title="decorator"><img src="https://s2.loli.net/2023/08/10/qckoIznlQp4Ot69.jpg" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="decorator"/></a><div class="content"><a class="title" href="/myblog/2023/08/10/decorator/" title="decorator">decorator</a><time datetime="2023-08-10T06:51:35.000Z" title="发表于 2023-08-10 14:51:35">2023-08-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By guzhongyue666</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">与君共勉</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/myblog/js/utils.js"></script><script src="/myblog/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '37Qomll1H0CF832dRWKZEDeh-gzGzoHsz',
+      appKey: 'K4cMZGM3f3CllZ22vtRCTM52',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/myblog/js/myjs.js"></script><div class="aplayer no-destroy" data-id="697054881" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="true" > </div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/myblog/js/search/local-search.js"></script></div></div></body></html>

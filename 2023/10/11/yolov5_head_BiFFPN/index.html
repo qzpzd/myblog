@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点 | 两个世界的我</title><meta name="author" content="guzhongyue666"><meta name="copyright" content="guzhongyue666"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="1.YOLOv5算法原始head结构 YOLOv5模型的Neck部分使用的是FPN+PAN结构，FPN是针对多尺度问题提出的，FPN结构是自上而下并且横向连接的，它利用金字塔的形式对尺度不同的特征图进行连接，将高层特征和低层特征进行融合。FPN与PAN结合，对来自不同骨干层的不同检测层进行参数聚合。这种组合虽然有效提高了网络的特征融合能力，但也会导致一个问题，即PAN结构的输入全部是FPN结构处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点">
+<meta property="og:url" content="https://qzpzd.github.io/myblog/2023/10/11/yolov5_head_BiFFPN/index.html">
+<meta property="og:site_name" content="两个世界的我">
+<meta property="og:description" content="1.YOLOv5算法原始head结构 YOLOv5模型的Neck部分使用的是FPN+PAN结构，FPN是针对多尺度问题提出的，FPN结构是自上而下并且横向连接的，它利用金字塔的形式对尺度不同的特征图进行连接，将高层特征和低层特征进行融合。FPN与PAN结合，对来自不同骨干层的不同检测层进行参数聚合。这种组合虽然有效提高了网络的特征融合能力，但也会导致一个问题，即PAN结构的输入全部是FPN结构处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png">
+<meta property="article:published_time" content="2023-10-11T10:12:35.000Z">
+<meta property="article:modified_time" content="2023-10-11T11:47:56.390Z">
+<meta property="article:author" content="guzhongyue666">
+<meta property="article:tag" content="-yolov5 -head -BiFPN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png"><link rel="shortcut icon" href="/myblog/img/favicon.jpg"><link rel="canonical" href="https://qzpzd.github.io/myblog/2023/10/11/yolov5_head_BiFFPN/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/myblog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/myblog/',
+  algolia: undefined,
+  localSearch: {"path":"/myblog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-11 19:47:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/myblog//css/mycss.css"><style type="text/css">.aplayer.aplayer-narrow .aplayer-body{left: -66px !important;transition: left 1s;} .aplayer.aplayer-narrow .aplayer-body:hover{left: 0 !important;}</style><link rel="stylesheet" href="APlayer.min.css"><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/gh/radium-bit/res@master/live2d/autoload.js" async></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async></script><meta name="generator" content="Hexo 7.0.0-rc2"><link rel="alternate" href="/myblog/atom.xml" title="两个世界的我" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/myblog/img/favicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/myblog/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/myblog/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/myblog/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/myblog/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myblog/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/myblog/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/myblog/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/myblog/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png')"><nav id="nav"><span id="blog-info"><a href="/myblog/" title="两个世界的我"><span class="site-name">两个世界的我</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/myblog/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myblog/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/myblog/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/myblog/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/myblog/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/myblog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-11T10:12:35.000Z" title="发表于 2023-10-11 18:12:35">2023-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-11T11:47:56.390Z" title="更新于 2023-10-11 19:47:56">2023-10-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/myblog/2023/10/11/yolov5_head_BiFFPN/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/myblog/2023/10/11/yolov5_head_BiFFPN/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>1.YOLOv5算法原始head结构</strong></p>
+<p>YOLOv5模型的Neck部分使用的是FPN+PAN结构，FPN是针对多尺度问题提出的，FPN结构是自上而下并且横向连接的，它利用金字塔的形式对尺度不同的特征图进行连接，将高层特征和低层特征进行融合。FPN与PAN结合，对来自不同骨干层的不同检测层进行参数聚合。这种组合虽然有效提高了网络的特征融合能力，但也会导致一个问题，即PAN结构的输入全部是FPN结构处理的特征信息，而骨干特征提取网络部分的原始特征信息存在一部分丢失。缺乏参与学习的原始信息很容易导致训练学习的偏差，影响检测的准确性。</p>
+<p>从neck特征融合入手，引入加权双向特征金字塔BiFPN来加强特征图的底层信息，使不同尺度的特征图进行信息融合，从而加强特征信息。</p>
+<p><strong>2.BiFPN原理与结构</strong><br>BiFPN是一种改进版的FPN网络结构，主要用于目标检测任务。该结构是加权且双向连接的，即自顶向下和自底向上结构，通过构造双向通道实现跨尺度连接，将特征提取网络中的特征直接与自下而上路径中的相对大小特征融合，保留了更浅的语义信息，而不会丢失太多的深层语义信息。</p>
+<p>传统的特征融合时将尺度不同的特征图以相同权重进行加权，但是当输入的特征图分辨率不同时，以相同的权重进行加权对输出的特征图不平等。所以BiFPN根据不同输入特征的重要性设置不同的权重，同时反复采用这种结构来加强特征融合。</p>
+<p>BiFPN结构中的加权融合方式采用快速归一化融合(Fast normalized fusion)，该融合方式是针对训练速度慢提出的，将权重放缩至0~1范围内，因没有使用Softmax方式，所以训练速度很快。跨尺度连接通过添加一个跳跃连接和双向路径来实现，自此实现了加权融合和双向跨尺度连接。</p>
+<p>传统的特征融合往往只是简单的 feature map 叠加&#x2F;相加 (sum them up)，比如使用concat或者shortcut连接，而不对同时加进来的 feature map 进行区分。然而，不同的输入 feature map 具有不同的分辨率，它们对融合输入 feature map 的贡献也是不同的，因此简单的对他们进行相加或叠加处理并不是最佳的操作。所以这里我们提出了一种简单而高效的加权特融合的机制。<br>常见的带权特征融合有三种方法：<br><img src="https://s2.loli.net/2023/10/11/EdCqgTs3mtwOQyL.png" alt="image.png"></p>
+<p>BiFPN结构如图所示<br><img src="https://s2.loli.net/2023/10/11/Mrgms1X9bNBwe5o.png" alt="image.png"></p>
+<p>详细结构图如下：<br><img src="https://s2.loli.net/2023/10/11/7D2ZQEytdUqO4Ga.png" alt="image.png"><br>从这张图可以看出图中有三个分支与两个分支融合，对应下面的代码部分</p>
+<p>与只有一个自顶向下和一个自底向上路径的PANet不同，我们处理每个双向路径(自顶向下和自底而上)路径作为一个特征网络层，并重复同一层多次，以实现更高层次的特征融合。如下图EfficientNet 的网络结构所示，我们对BiFPN是重复使用多次的。而这个使用次数也不是我们认为设定的，而是作为参数一起加入网络的设计当中，使用NAS技术算出来的。<br><img src="https://s2.loli.net/2023/10/11/QzS8NCevsHAVbiO.png" alt="image.png"></p>
+<p>根据上面可以看出，BiFPN其实就是融合了FPN与PAN并增加了跳跃连接来获取浅层信息，所以对于小目标检测效果比较好。</p>
+<p><strong>3.代码与文件修改</strong></p>
+<h1 id="在Common-py中添加定义模块-Concat"><a href="#在Common-py中添加定义模块-Concat" class="headerlink" title="在Common.py中添加定义模块(Concat)"></a>在Common.py中添加定义模块(Concat)</h1><figure class="highlight plaintext"><figcaption><span>[BiFPN]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># 结合BiFPN 设置可学习参数 学习不同分支的权重<br># 两个分支concat操作<br>class BiFPN_Concat2(nn.Module):<br>    def __init__(self, dimension=1):<br>        super(BiFPN_Concat2, self).__init__()<br>        self.d = dimension<br>        self.w = nn.Parameter(torch.ones(2, dtype=torch.float32), requires_grad=True)<br>        self.epsilon = 0.0001<br>        # 设置可学习参数 nn.Parameter的作用是：将一个不可训练的类型Tensor转换成可以训练的类型 <br>        parameter<br>        # 并且会向宿主模型注册该参数 成为其一部分 即model.parameters()会包含这个parameter<br>        # 从而在参数优化的时候可以自动一起优化<br> <br>    def forward(self, x):<br>        w = self.w<br>        weight = w / (torch.sum(w, dim=0) + self.epsilon)  # 将权重进行归一化<br>        # Fast normalized fusion<br>        x = [weight[0] * x[0], weight[1] * x[1]]<br>        return torch.cat(x, self.d)<br> <br> <br># 三个分支concat操作<br>class BiFPN_Concat3(nn.Module):<br>    def __init__(self, dimension=1):<br>        super(BiFPN_Concat3, self).__init__()<br>        self.d = dimension<br>        self.w = nn.Parameter(torch.ones(3, dtype=torch.float32), requires_grad=True)<br>        self.epsilon = 0.0001<br> <br>    def forward(self, x):<br>        w = self.w<br>        weight = w / (torch.sum(w, dim=0) + self.epsilon)  # 将权重进行归一化<br>        # Fast normalized fusion<br>        x = [weight[0] * x[0], weight[1] * x[1], weight[2] * x[2]]<br>        return torch.cat(x, self.d)<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="修改yolov5s-yaml"><a href="#修改yolov5s-yaml" class="headerlink" title="修改yolov5s.yaml"></a>修改yolov5s.yaml</h1><p>BiFPN_Concat本质是add操作，不是concat操作，因此，BiFPN_Concat的各个输入层要求大小完全一致（通道数、feature map大小等），因此，这里要修改之前的参数[-1, 13, 6]，来满足这个要求：<br>-1层就是上一层的输出，原来上一层的输出channel数为256，这里改成512<br>13层就是这里[-1, 3, C3, [512, False]], # 13<br>这样修改后，BiFPN_Concat各个输入大小都是[bs,256,40,40]<br>最后BiFPN_Add后面的参数层设置为[256, 256]也就是输入输出channel数都是256</p>
+<figure class="highlight plaintext"><figcaption><span>[魔改]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># YOLOv5 head<br>head:<br>  [[-1, 1, Conv, [512, 1, 1]],<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]],<br>   [[-1, 6], 1, BiFPN_Concat2, [1]],  # cat backbone P4<br>   [-1, 3, C3, [512, False]],  # 13<br> <br>   [-1, 1, Conv, [256, 1, 1]],<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]],<br>   [[-1, 4], 1, BiFPN_Concat2, [1]],  # cat backbone P3<br>   [-1, 3, C3, [256, False]],  # 17 (P3/8-small)<br> <br>   [-1, 1, Conv, [256, 3, 2]],<br>   [[-1, 14,6], 1,BiFPN_Concat3, [1]],  # cat head P4<br>   [-1, 3, C3, [512, False]],  # 20 (P4/16-medium)<br> <br>   [-1, 1, Conv, [512, 3, 2]],<br>   [[-1, 10], 1, BiFPN_Concat2, [1]],  # cat head P5<br>   [-1, 3, C3, [1024, False]],  # 23 (P5/32-large)<br> <br>   [[17, 20, 23], 1, Detect, [nc, anchors]],  # Detect(P3, P4, P5)<br>  ]<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>3.将类名加入进去，修改yolo.py</strong><br>models&#x2F;yolo.py中的parse_model函数中搜索elif m is Concat:语句,在其后面加上BiFPN_Concat相关语句</p>
+<figure class="highlight plaintext"><figcaption><span>[魔改]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># 添加bifpn_concat结构<br>elif m in [Concat, BiFPN_Concat2, BiFPN_Concat3]:<br>    c2 = sum(ch[x] for x in f)<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>4. 修改train.py</strong></p>
+<figure class="highlight plaintext"><figcaption><span>[魔改]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#调用模块<br>from models.common import BiFPN_Concat2, BiFPN_Concat3<br><br>#向优化器器中添加BiFPN的权重参数<br> pg0, pg1, pg2 = [], [], []  # optimizer parameter groups<br>    for k, v in model.named_modules():<br>        # hasattr: 测试指定的对象是否具有给定的属性，返回一个布尔值<br>        if hasattr(v, &#x27;bias&#x27;) and isinstance(v.bias, nn.Parameter):<br>            pg2.append(v.bias)  # biases<br>        if isinstance(v, nn.BatchNorm2d):<br>            pg0.append(v.weight)  # no decay<br>        elif hasattr(v, &#x27;weight&#x27;) and isinstance(v.weight, nn.Parameter):<br>            pg1.append(v.weight)  # apply decay<br> <br>        elif isinstance(v, BiFPN_Concat2) and hasattr(v, &#x27;w&#x27;) and isinstance(v.w, nn.Parameter):<br>            pg1.append(v.w)<br>        elif isinstance(v, BiFPN_Concat3) and hasattr(v, &#x27;w&#x27;) and isinstance(v.w, nn.Parameter):<br>            pg1.append(v.w)<br> <br> <br>    if opt.adam:<br>        optimizer = optim.Adam(pg0, lr=hyp[&#x27;lr0&#x27;], betas=(hyp[&#x27;momentum&#x27;], 0.999))  # adjust beta1 to momentum<br>    else:<br>        optimizer = optim.SGD(pg0, lr=hyp[&#x27;lr0&#x27;], momentum=hyp[&#x27;momentum&#x27;], nesterov=True)<br> <br>    optimizer.add_param_group(&#123;&#x27;params&#x27;: pg1, &#x27;weight_decay&#x27;: hyp[&#x27;weight_decay&#x27;]&#125;)  # add pg1 with weight_decay<br>    optimizer.add_param_group(&#123;&#x27;params&#x27;: pg2&#125;)  # add pg2 (biases)<br>    logger.info(&#x27;Optimizer groups: %g .bias, %g conv.weight, %g other&#x27; % (len(pg2), len(pg1), len(pg0)))<br>    del pg0, pg1, pg2<br></code></pre></td></tr></table></figure>
+
+<p>最后为了方便测试模型配置文件是否正确、模型是否能够正确进行前向传播，以及查看模型的detect层输出，自己就编写了这个函数</p>
+<figure class="highlight plaintext"><figcaption><span>[打印模型参数]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">import argparse<br>import os<br>import torch<br>import yaml<br><br>from models.yolo import Model<br><br># 指定要使用的GPU<br>os.environ[&#x27;CUDA_VISIBLE_DEVICES&#x27;] = &#x27;0&#x27;<br><br><br>def parse_opt(known=False):<br>    parser = argparse.ArgumentParser()<br>    parser.add_argument(&#x27;--cfg&#x27;, type=str,<br>                        default=&#x27;models/yolov5s.yaml&#x27;,<br>                        help=&#x27;model.yaml path&#x27;)<br>    parser.add_argument(&#x27;--hyp&#x27;, type=str, default=&#x27;data/hyps/hyp.scratch-high.yaml&#x27;,<br>                        help=&#x27;hyperparameters path&#x27;)<br><br>    opt = parser.parse_known_args()[0] if known else parser.parse_args()<br>    return opt<br><br><br>def main(opt):<br>    with open(opt.hyp, encoding=&#x27;utf-8&#x27;, errors=&#x27;ignore&#x27;) as f:<br>        hyp = yaml.safe_load(f)  # load hyps dict 字典形式<br><br>    # 如果配置文件中有中文，打开时要加encoding = &#x27;utf-8&#x27;参数<br>    with open(opt.cfg, encoding=&#x27;ascii&#x27;, errors=&#x27;ignore&#x27;) as f:<br>        cfg = yaml.safe_load(f)  # model dict 取到配置文件中每条的信息<br><br>    nc = cfg[&#x27;nc&#x27;]  # 获取数据集的类别数<br>    device = torch.device(&#x27;cuda:0&#x27;) if torch.cuda.is_available() else &#x27;cpu&#x27;<br>    print(f&#x27;device: &#123;device&#125;&#x27;)<br>    # input_img = torch.zeros(size=(1, 3, 1280, 1280))<br>    input_img = torch.zeros(size=(1, 3, 640, 640))<br>    input_img = input_img.to(device, non_blocking=True).float()<br>    print(f&#x27;the model of \&#x27;&#123;opt.cfg&#125;\&#x27; is :&#x27;)<br>    model = Model(opt.cfg, ch=3, nc=nc, anchors=hyp.get(&#x27;anchors&#x27;)).to(device)  # create<br>    output = model(input_img)<br><br>    print(f&#x27;number of detect layers: &#123;len(output)&#125;&#x27;)<br>    print(&#x27;Detect head output: &#x27;)<br>    # print(f&#x27;P2/4: &#123;output[len(output) - 4].shape&#125;&#x27;)<br>    print(f&#x27;P3/8: &#123;output[len(output) - 3].shape&#125;&#x27;)<br>    print(f&#x27;P4/16: &#123;output[len(output) - 2].shape&#125;&#x27;)<br>    print(f&#x27;P5/32: &#123;output[len(output) - 1].shape&#125;&#x27;)<br><br>    &#x27;&#x27;&#x27;<br>    3<br>    torch.Size([1, 3, 80, 80, 85])<br>    torch.Size([1, 3, 40, 40, 85])<br>    torch.Size([1, 3, 20, 20, 85])<br>    &#x27;&#x27;&#x27;<br><br><br>if __name__ == &#x27;__main__&#x27;:<br>    opt = parse_opt()<br>    main(opt)<br><br></code></pre></td></tr></table></figure>
+
+<p>pytorch获取模型某一层参数名及参数值方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">import os<br>import torch<br>import torch.nn as nn<br><br># 设置GPU<br>os.environ[&#x27;CUDA_VISIBLE_DEVICES&#x27;] = &#x27;1&#x27;<br>device = torch.device(&#x27;cuda:0&#x27;) if torch.cuda.is_available() else &#x27;cpu&#x27;<br><br># 创建模型<br>model = nn.Sequential(nn.Conv2d(3, 16, kernel_size=1),<br>                      nn.Conv2d(16, 3, kernel_size=1))<br>model.to(device)<br><br># 方法一<br># 打印某一层的参数名<br>for name in model.state_dict():<br>    print(name)<br># 直接索引某一层的name来输出该层的参数<br>print(model.state_dict()[&#x27;1.weight&#x27;])<br><br># 方法二<br># 获取模型所有参数名和参数值 存储在list中<br>params = list(model.named_parameters())<br># 分别索引得到某层的名称和参数值<br>print(params[2][0])  # name<br>print(params[2][1].data)  # data<br><br># 方法三<br># 依次遍历模型每一层的参数 存储到dict中<br>params = &#123;&#125;<br>for name, param in model.named_parameters():<br>    params[name] = param.detach().cpu().numpy()<br>print(params[&#x27;0.weight&#x27;])<br><br># 方法四<br># 遍历模型的每一层 查找目标层 输出参数值<br>for layer in model.modules():<br>    # 打印Conv2d层的参数<br>    if (isinstance(layer, nn.Conv2d)):<br>        print(layer.weight)<br><br></code></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://qzpzd.github.io/myblog">guzhongyue666</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://qzpzd.github.io/myblog/2023/10/11/yolov5_head_BiFFPN/">https://qzpzd.github.io/myblog/2023/10/11/yolov5_head_BiFFPN/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://qzpzd.github.io/myblog" target="_blank">两个世界的我</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/myblog/tags/yolov5-head-BiFPN/">-yolov5 -head -BiFPN</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/myblog/2023/10/11/yolov5_head/" title="(一)yolov5检测头head魔改|针对小目标检测"><img class="cover" src="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png" onerror="onerror=null;src='/myblog/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">(一)yolov5检测头head魔改|针对小目标检测</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/myblog/img/favicon.jpg" onerror="this.onerror=null;this.src='/myblog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">guzhongyue666</div><div class="author-info__description">主要涉及机器学习、深度学习、目标检测、分割、激光雷达、人工智能、自动驾驶领域</div></div><div class="card-info-data site-data is-center"><a href="/myblog/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/myblog/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/myblog/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/qzpzd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/qzpzd" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:qzpzd1227@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_47709941?type=blog" target="_blank" title="Csdn"><i class="fas fa-copyright" style="color: #6495ED;"></i></a><a class="social-icon" href="https://www.cnblogs.com/qzpzd" target="_blank" title="Cnblogs"><i class="fas fa-blog" style="color: #800080;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8Common-py%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97-Concat"><span class="toc-number">1.</span> <span class="toc-text">在Common.py中添加定义模块(Concat)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9yolov5s-yaml"><span class="toc-number">2.</span> <span class="toc-text">修改yolov5s.yaml</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/myblog/2023/10/11/yolov5_head_BiFFPN/" title="(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点"><img src="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点"/></a><div class="content"><a class="title" href="/myblog/2023/10/11/yolov5_head_BiFFPN/" title="(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点">(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点</a><time datetime="2023-10-11T10:12:35.000Z" title="发表于 2023-10-11 18:12:35">2023-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2023/10/11/yolov5_head/" title="(一)yolov5检测头head魔改|针对小目标检测"><img src="https://s2.loli.net/2023/10/11/8rF7lbhcgaIORAk.png" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="(一)yolov5检测头head魔改|针对小目标检测"/></a><div class="content"><a class="title" href="/myblog/2023/10/11/yolov5_head/" title="(一)yolov5检测头head魔改|针对小目标检测">(一)yolov5检测头head魔改|针对小目标检测</a><time datetime="2023-10-11T06:51:35.000Z" title="发表于 2023-10-11 14:51:35">2023-10-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/myblog/2023/10/09/hello-world/" title="Hello World">Hello World</a><time datetime="2023-10-09T11:05:01.773Z" title="发表于 2023-10-09 19:05:01">2023-10-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2023/08/10/onnx_detect/" title="onnx模型和手动生成anchors文件进行后处理与测试"><img src="https://s2.loli.net/2023/08/10/qckoIznlQp4Ot69.jpg" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="onnx模型和手动生成anchors文件进行后处理与测试"/></a><div class="content"><a class="title" href="/myblog/2023/08/10/onnx_detect/" title="onnx模型和手动生成anchors文件进行后处理与测试">onnx模型和手动生成anchors文件进行后处理与测试</a><time datetime="2023-08-10T06:51:35.000Z" title="发表于 2023-08-10 14:51:35">2023-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2023/08/10/decorator/" title="decorator"><img src="https://s2.loli.net/2023/08/10/qckoIznlQp4Ot69.jpg" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="decorator"/></a><div class="content"><a class="title" href="/myblog/2023/08/10/decorator/" title="decorator">decorator</a><time datetime="2023-08-10T06:51:35.000Z" title="发表于 2023-08-10 14:51:35">2023-08-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By guzhongyue666</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">与君共勉</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/myblog/js/utils.js"></script><script src="/myblog/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '37Qomll1H0CF832dRWKZEDeh-gzGzoHsz',
+      appKey: 'K4cMZGM3f3CllZ22vtRCTM52',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/myblog/js/myjs.js"></script><div class="aplayer no-destroy" data-id="697054881" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="true" > </div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/myblog/js/search/local-search.js"></script></div></div></body></html>
