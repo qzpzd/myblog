@@ -14,50 +14,7 @@
       </tags>
   </entry>
   <entry>
-    <title>decorator</title>
-    <url>/myblog/2023/08/10/decorator/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><h1 id="1、-timer-测量执行时间"><a href="#1、-timer-测量执行时间" class="headerlink" title="1、@timer:测量执行时间"></a>1、@timer:测量执行时间</h1><p>@timer装饰器可以帮助我们跟踪特定函数的执行时间。通过用这个装饰器包装函数，我可以快速识别瓶颈并优化代码的关键部分。</p>
-<figure class="highlight plaintext"><figcaption><span>[测量执行时间]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">import time<br> <br>def timer(func):<br>   def wrapper(*args, **kwargs):<br>       start_time = time.time()<br>       result = func(*args, **kwargs)<br>       end_time = time.time()<br>       print(f&quot;&#123;func.__name__&#125; took &#123;end_time - start_time:.2f&#125; seconds to execute.&quot;)<br>       return result<br>   return wrapper<br>@timer<br>def my_data_processing_function():<br>   # Your data processing code here<br><br></code></pre></td></tr></table></figure>
-
-<h1 id="2-log-results-日志输出"><a href="#2-log-results-日志输出" class="headerlink" title="2.@log_results:日志输出"></a>2.@log_results:日志输出</h1><p>在运行复杂的数据分析时，跟踪每个函数的输出变得至关重要。@log_results装饰器可以帮助我们记录函数的结果，以便于调试和监控</p>
-<figure class="highlight plaintext"><figcaption><span>[日志输出]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">def log_results(func):<br>    def wrapper(*args, **kwargs):<br>        result = func(*args, **kwargs)<br>        with open(&quot;results.log&quot;, &quot;a&quot;) as log_file:<br>            log_file.write(f&quot;&#123;func.__name__&#125; - Result: &#123;result&#125;\n&quot;)<br>        return result<br> <br>    return wrapper<br> @log_results<br>def calculate_metrics(data):<br>   # Your metric calculation code here<br><br></code></pre></td></tr></table></figure>
-
-<h1 id="3-suppress-errors-优雅的错误处理"><a href="#3-suppress-errors-优雅的错误处理" class="headerlink" title="3.@suppress_errors:优雅的错误处理"></a>3.@suppress_errors:优雅的错误处理</h1><p>@suppress_errors装饰器可以优雅地处理异常并继续执行,可以避免隐藏严重错误，还可以进行错误的详细输出，便于调试.</p>
-<figure class="highlight plaintext"><figcaption><span>[错误处理]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">def suppress_errors(func):<br>    def wrapper(*args, **kwargs):<br>        try:<br>            return func(*args, **kwargs)<br>        except Exception as e:<br>            print(f&quot;Error in &#123;func.__name__&#125;: &#123;e&#125;&quot;)<br>            return None<br> <br>    return wrapper<br>@suppress_errors<br>def preprocess_data(data):<br>   # Your data preprocessing code here<br><br></code></pre></td></tr></table></figure>
-
-<h1 id="4-debug-调试变得更容易"><a href="#4-debug-调试变得更容易" class="headerlink" title="4.@debug:调试变得更容易"></a>4.@debug:调试变得更容易</h1><p>调试复杂的代码可能非常耗时。@debug装饰器可以打印函数的输入参数和它们的值，以便于调试:</p>
-<figure class="highlight plaintext"><figcaption><span>[调试]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">def debug(func):<br>    def wrapper(*args, **kwargs):<br>        print(f&quot;Debugging &#123;func.__name__&#125; - args: &#123;args&#125;, kwargs: &#123;kwargs&#125;&quot;)<br>        return func(*args, **kwargs)<br> <br>    return wrapper<br>@debug<br>def complex_data_processing(data, threshold=0.5):<br>   # Your complex data processing code here<br><br></code></pre></td></tr></table></figure>
-
-
-<blockquote><blockquote>
-<p>1.@timer:测量执行时间<br>2.@log_results:日志输出<br>3.@suppress_errors:优雅的错误处理<br>4.@debug:调试变得更容易</p>
-</blockquote>
-<footer><strong>数据STUDIO</strong><cite>- source [https://mp.weixin.qq.com/s/JFaH_GqOFMARnzyWqV2TFQ] [10个简单但很有用的Python装饰器]</cite></footer></blockquote>
-]]></content>
-      <tags>
-        <tag>-python -decorator</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/myblog/2023/10/09/hello-world/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>(一)yolov5检测头head魔改|针对小目标检测</title>
+    <title>(一)yolov5检测头head魔改之添加小目标层|针对小目标检测</title>
     <url>/myblog/2023/10/11/yolov5_head/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><p><strong>1.YOLOv5算法简介</strong></p>
 <p>YOLOv5主要由输入端、Backone、Neck以及Prediction四部分组成。其中：</p>
@@ -95,6 +52,23 @@
 ]]></content>
       <tags>
         <tag>-yolov5 -head</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(三)yolov5修改损失函数权重系数|提升小目标检测</title>
+    <url>/myblog/2023/10/12/yolov5_loss/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><h1 id="损失计算"><a href="#损失计算" class="headerlink" title="损失计算"></a>损失计算</h1><p>YOLOv5的损失主要由三个部分组成：</p>
+<p>Classes loss，分类损失，采用的是BCE loss，注意只计算正样本的分类损失。 </p>
+<p>Objectness loss，obj损失，采用的依然是BCE loss，注意这里的obj指的是网络预测的目标边界框与GT Box的CIoU。这里计算的是所有样本的obj损失。 </p>
+<p>Location loss，定位损失，采用的是CIoU loss，注意只计算正样本的定位损失。<br><img src="https://s2.loli.net/2023/10/12/my9WaDVM81bsNCF.png" alt="image.png"></p>
+<p>在源码中，针对预测小目标的预测特征层（P3）采用的权重是4.0，针对预测中等目标的预测特征层（P4）采用的权重是1.0，针对预测大目标的预测特征层（P5）采用的权重是0.4，作者说这是针对COCO数据集设置的超参数。</p>
+<p><img src="https://s2.loli.net/2023/10/12/1q4WwCNskn8SEVl.png" alt="image.png"></p>
+<p>对应在loss.py文件中的class ComputeLoss类找到下面代码，修改相应的数值</p>
+<figure class="highlight plaintext"><figcaption><span>[loss]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">self.balance = &#123;3: [4.0, 1.0, 0.4]&#125;.get(m.nl, [4.0, 1.0, 0.25, 0.06, 0.02])  # P3-P7<br></code></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>-yolov5 -loss</tag>
       </tags>
   </entry>
   <entry>
@@ -190,7 +164,7 @@
       </tags>
   </entry>
   <entry>
-    <title>(一)yolov5检测头head魔改之BiFPN|优化小目标检测涨点</title>
+    <title>(二)yolov5检测头head魔改之BiFPN|优化小目标检测涨点</title>
     <url>/myblog/2023/10/11/yolov5_head_BiFFPN/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><p><strong>1.YOLOv5算法原始head结构</strong></p>
 <p>YOLOv5模型的Neck部分使用的是FPN+PAN结构，FPN是针对多尺度问题提出的，FPN结构是自上而下并且横向连接的，它利用金字塔的形式对尺度不同的特征图进行连接，将高层特征和低层特征进行融合。FPN与PAN结合，对来自不同骨干层的不同检测层进行参数聚合。这种组合虽然有效提高了网络的特征融合能力，但也会导致一个问题，即PAN结构的输入全部是FPN结构处理的特征信息，而骨干特征提取网络部分的原始特征信息存在一部分丢失。缺乏参与学习的原始信息很容易导致训练学习的偏差，影响检测的准确性。</p>
@@ -222,6 +196,114 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">import os<br>import torch<br>import torch.nn as nn<br><br># 设置GPU<br>os.environ[&#x27;CUDA_VISIBLE_DEVICES&#x27;] = &#x27;1&#x27;<br>device = torch.device(&#x27;cuda:0&#x27;) if torch.cuda.is_available() else &#x27;cpu&#x27;<br><br># 创建模型<br>model = nn.Sequential(nn.Conv2d(3, 16, kernel_size=1),<br>                      nn.Conv2d(16, 3, kernel_size=1))<br>model.to(device)<br><br># 方法一<br># 打印某一层的参数名<br>for name in model.state_dict():<br>    print(name)<br># 直接索引某一层的name来输出该层的参数<br>print(model.state_dict()[&#x27;1.weight&#x27;])<br><br># 方法二<br># 获取模型所有参数名和参数值 存储在list中<br>params = list(model.named_parameters())<br># 分别索引得到某层的名称和参数值<br>print(params[2][0])  # name<br>print(params[2][1].data)  # data<br><br># 方法三<br># 依次遍历模型每一层的参数 存储到dict中<br>params = &#123;&#125;<br>for name, param in model.named_parameters():<br>    params[name] = param.detach().cpu().numpy()<br>print(params[&#x27;0.weight&#x27;])<br><br># 方法四<br># 遍历模型的每一层 查找目标层 输出参数值<br>for layer in model.modules():<br>    # 打印Conv2d层的参数<br>    if (isinstance(layer, nn.Conv2d)):<br>        print(layer.weight)<br><br></code></pre></td></tr></table></figure>]]></content>
       <tags>
         <tag>-yolov5 -head -BiFPN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>decorator</title>
+    <url>/myblog/2023/08/10/decorator/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><h1 id="1、-timer-测量执行时间"><a href="#1、-timer-测量执行时间" class="headerlink" title="1、@timer:测量执行时间"></a>1、@timer:测量执行时间</h1><p>@timer装饰器可以帮助我们跟踪特定函数的执行时间。通过用这个装饰器包装函数，我可以快速识别瓶颈并优化代码的关键部分。</p>
+<figure class="highlight plaintext"><figcaption><span>[测量执行时间]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">import time<br> <br>def timer(func):<br>   def wrapper(*args, **kwargs):<br>       start_time = time.time()<br>       result = func(*args, **kwargs)<br>       end_time = time.time()<br>       print(f&quot;&#123;func.__name__&#125; took &#123;end_time - start_time:.2f&#125; seconds to execute.&quot;)<br>       return result<br>   return wrapper<br>@timer<br>def my_data_processing_function():<br>   # Your data processing code here<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="2-log-results-日志输出"><a href="#2-log-results-日志输出" class="headerlink" title="2.@log_results:日志输出"></a>2.@log_results:日志输出</h1><p>在运行复杂的数据分析时，跟踪每个函数的输出变得至关重要。@log_results装饰器可以帮助我们记录函数的结果，以便于调试和监控</p>
+<figure class="highlight plaintext"><figcaption><span>[日志输出]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">def log_results(func):<br>    def wrapper(*args, **kwargs):<br>        result = func(*args, **kwargs)<br>        with open(&quot;results.log&quot;, &quot;a&quot;) as log_file:<br>            log_file.write(f&quot;&#123;func.__name__&#125; - Result: &#123;result&#125;\n&quot;)<br>        return result<br> <br>    return wrapper<br> @log_results<br>def calculate_metrics(data):<br>   # Your metric calculation code here<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="3-suppress-errors-优雅的错误处理"><a href="#3-suppress-errors-优雅的错误处理" class="headerlink" title="3.@suppress_errors:优雅的错误处理"></a>3.@suppress_errors:优雅的错误处理</h1><p>@suppress_errors装饰器可以优雅地处理异常并继续执行,可以避免隐藏严重错误，还可以进行错误的详细输出，便于调试.</p>
+<figure class="highlight plaintext"><figcaption><span>[错误处理]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">def suppress_errors(func):<br>    def wrapper(*args, **kwargs):<br>        try:<br>            return func(*args, **kwargs)<br>        except Exception as e:<br>            print(f&quot;Error in &#123;func.__name__&#125;: &#123;e&#125;&quot;)<br>            return None<br> <br>    return wrapper<br>@suppress_errors<br>def preprocess_data(data):<br>   # Your data preprocessing code here<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="4-debug-调试变得更容易"><a href="#4-debug-调试变得更容易" class="headerlink" title="4.@debug:调试变得更容易"></a>4.@debug:调试变得更容易</h1><p>调试复杂的代码可能非常耗时。@debug装饰器可以打印函数的输入参数和它们的值，以便于调试:</p>
+<figure class="highlight plaintext"><figcaption><span>[调试]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">def debug(func):<br>    def wrapper(*args, **kwargs):<br>        print(f&quot;Debugging &#123;func.__name__&#125; - args: &#123;args&#125;, kwargs: &#123;kwargs&#125;&quot;)<br>        return func(*args, **kwargs)<br> <br>    return wrapper<br>@debug<br>def complex_data_processing(data, threshold=0.5):<br>   # Your complex data processing code here<br><br></code></pre></td></tr></table></figure>
+
+
+<blockquote><blockquote>
+<p>1.@timer:测量执行时间<br>2.@log_results:日志输出<br>3.@suppress_errors:优雅的错误处理<br>4.@debug:调试变得更容易</p>
+</blockquote>
+<footer><strong>数据STUDIO</strong><cite>- source [https://mp.weixin.qq.com/s/JFaH_GqOFMARnzyWqV2TFQ] [10个简单但很有用的Python装饰器]</cite></footer></blockquote>
+]]></content>
+      <tags>
+        <tag>-python -decorator</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/myblog/2023/10/09/hello-world/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>(三)yolov5检测头head魔改之CBAM，ODConv|添加注意力</title>
+    <url>/myblog/2023/10/12/yolov5_head_CBAM/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/myblog/css/APlayer.min.css"><script src="/myblog/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/myblog/js/Meting.min.js"></script><h1 id="1-CBAM介绍"><a href="#1-CBAM介绍" class="headerlink" title="1.CBAM介绍"></a>1.CBAM介绍</h1><p>论文题目：《CBAM: Convolutional Block Attention Module》<br>论文地址：  <a href="https://arxiv.org/pdf/1807.06521.pdf">https://arxiv.org/pdf/1807.06521.pdf</a><br>实验证明，将CBAM注意力模块嵌入到YOLOv5网络中，有利于解决原始网络无注意力偏好的问题。主要在分类问题中比较明显</p>
+<p><img src="https://s2.loli.net/2023/10/12/wUIdgiNVbkvB6ap.png" alt="image.png"></p>
+<p>CBAM注意力结构基本原理：从上图明显可以看到， CBAM一共包含2个独立的子模块， 通道注意力模块（Channel Attention Module，CAM) 和空间注意力模块（Spartial Attention Module，SAM) ，分别进行通道与空间维度上的注意力特征融合。 这样不只能够节约参数和计算力，并且保证了其能够做为即插即用的模块集成到现有的网络架构中去。</p>
+<p>那对应YOLOv5结合CBAM需要修改哪些地方：</p>
+<h1 id="2-common-py中加入CBAM代码"><a href="#2-common-py中加入CBAM代码" class="headerlink" title="2.common.py中加入CBAM代码"></a>2.common.py中加入CBAM代码</h1><figure class="highlight plaintext"><figcaption><span>[CBAM]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext">class ChannelAttentionModule(nn.Module):<br>    def __init__(self, c1, reduction=16):<br>        super(ChannelAttentionModule, self).__init__()<br>        mid_channel = c1 // reduction<br>        self.avg_pool = nn.AdaptiveAvgPool2d(1)<br>        self.max_pool = nn.AdaptiveMaxPool2d(1)<br>        self.shared_MLP = nn.Sequential(<br>            nn.Linear(in_features=c1, out_features=mid_channel),<br>            nn.ReLU(),<br>            nn.Linear(in_features=mid_channel, out_features=c1)<br>        )<br>        self.sigmoid = nn.Sigmoid()<br>        #self.act=SiLU()<br>    def forward(self, x):<br>        avgout = self.shared_MLP(self.avg_pool(x).view(x.size(0),-1)).unsqueeze(2).unsqueeze(3)<br>        maxout = self.shared_MLP(self.max_pool(x).view(x.size(0),-1)).unsqueeze(2).unsqueeze(3)<br>        return self.sigmoid(avgout + maxout)<br>class SpatialAttentionModule(nn.Module):<br>    def __init__(self):<br>        super(SpatialAttentionModule, self).__init__()<br>        self.conv2d = nn.Conv2d(in_channels=2, out_channels=1, kernel_size=7, stride=1, padding=3) <br>        #self.act=SiLU()<br>        self.sigmoid = nn.Sigmoid()<br>    def forward(self, x):<br>        avgout = torch.mean(x, dim=1, keepdim=True)<br>        maxout, _ = torch.max(x, dim=1, keepdim=True)<br>        out = torch.cat([avgout, maxout], dim=1)<br>        out = self.sigmoid(self.conv2d(out))<br>        return out<br> <br>class CBAM(nn.Module):<br>    def __init__(self, c1,c2):<br>        super(CBAM, self).__init__()<br>        self.channel_attention = ChannelAttentionModule(c1)<br>        self.spatial_attention = SpatialAttentionModule()<br> <br>    def forward(self, x):<br>        out = self.channel_attention(x) * x<br>        out = self.spatial_attention(out) * out<br>        return out<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="3-在yolo-py文件中添加对应的CBAM"><a href="#3-在yolo-py文件中添加对应的CBAM" class="headerlink" title="3.在yolo.py文件中添加对应的CBAM"></a>3.在yolo.py文件中添加对应的CBAM</h1><figure class="highlight plaintext"><figcaption><span>[yolo.py]</span></figcaption><table><tr><td class="code"><pre><code class="hljs plaintext"> if m in [Conv, GhostConv, Bottleneck, GhostBottleneck, SPP, <br>DWConv, MixConv2d, Focus, CrossConv, BottleneckCSP, C3, C3TR, CBAM]:      <br></code></pre></td></tr></table></figure>
+
+<h1 id="4-在yolov5s-yaml文件中添加CBAM"><a href="#4-在yolov5s-yaml文件中添加CBAM" class="headerlink" title="4.在yolov5s.yaml文件中添加CBAM"></a>4.在yolov5s.yaml文件中添加CBAM</h1><p>根据实际训练效果，在配置文件中的C3模块后面适当添加CBAM注意力模块，过程中注意通道数和网络层数的变化（注：不同添加位置效果可能不大一样），例如下面作为参考：在最后检测层上面添加CBAM，其中BiFPND，BiFPNT分别是二分支与三分支的BiFPN</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">#Head<br>head:<br>  [[-1, 1, Conv, [512, 1, 1]],                     #14<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]],     #15<br>   [[-1, 9], 1, BiFPND, [256, 256]],               #16 <br>   [-1, 3, C3, [512, False]],                      #17<br> <br>   [-1, 1, Conv, [256, 1, 1]],                     #18<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]],     #19<br>   [[-1, 6], 1, BiFPND, [128, 128]],               #20 <br>   [-1, 3, C3, [256, False]],                      #21 <br> <br>   [-1, 1, Conv, [512, 3, 2]],                     #22<br>   [[-1, 17, 9], 1, BiFPNT, [256, 256]],          #23<br>   [-1, 3, C3, [512, False]],                      #24 <br> <br>   [-1, 1, Conv, [512, 3, 2]],                     #25<br>   [[-1, 14], 1, BiFPND, [256, 256]],              #26<br>   [-1, 3, C3, [1024, False]],                     #27 <br>   [-1, 1, CBAM, [1024]],                            #28<br> <br>   [[21, 24, 28], 1, Detect, [nc, anchors]],       #29 Detect<br>  ]<br></code></pre></td></tr></table></figure>
+
+<h1 id="其它注意力SE，ECA与CSBAM区别"><a href="#其它注意力SE，ECA与CSBAM区别" class="headerlink" title="其它注意力SE，ECA与CSBAM区别"></a>其它注意力SE，ECA与CSBAM区别</h1><p>注意力机制顾名思义就是通过对感兴趣的区域提升更多的注意力，尽可能的抑制不感兴趣的区域在图像分割中的作用。深度学习CNN中可以将注意力机制分为通道注意力和空间注意力两种，通道注意力是确定不同通道之间的权重关系，提升重点通道的权重，抑制作用不大的通道，空间注意力是确定空间邻域不同像素之间的权重关系，提升重点区域像素的权重，让算法更多的关注我们需要的研究区域，减小非必要区域的权重。</p>
+<p><strong>一、SE (Squeeze and Excitation）注意力机制</strong><br>SE注意力机制是通道注意力模式下的一种确定权重的方法，它通过在不同通道间分配权重达到主次优先的目的。如下图所示，为SE注意力机制的结构图。</p>
+<p>该结构主要分为以下三个方面：</p>
+<p>①：通过将特征图进行Squeeze(压缩)，该步骤是通过全局平均池化把特征图从大小为（N,C,H,W)转换为（N,C,1,1)，这样就达到了全局上下文信息的融合。</p>
+<p>②：Excitation操作，该步骤使用两个全连接层，通过全连接层之间的非线性添加模型的复杂度，达到确定不同通道之间的权重作用，其中第一个全连接层使用ReLU激活函数，第二个全连接层采用Sigmoid激活函数，为了将权重中映射到（0，1）之间。值得注意的是，为了减少计算量进行降维处理，将第一个全连接的输出采用输入的1&#x2F;4或者1&#x2F;16。</p>
+<p>③：将reshape过后的权重值与原有的特征图做乘法运算（该步骤采用了Python的广播机制），得到不同权重下的特征图。</p>
+<p><img src="https://s2.loli.net/2023/10/12/IPld8LETkFc6B5w.png" alt="image.png"></p>
+<p>具体PyTorch实现代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">import torch<br>import torch.nn as nn<br><br><br>class Se(nn.Module):<br>    def __init__(self,in_channel,reduction=16):<br>        super(Se, self).__init__()<br>        self.pool=nn.AdaptiveAvgPool2d(output_size=1)<br>        self.fc=nn.Sequential(<br>            nn.Linear(in_features=in_channel,out_features=in_channel//reduction,bias=False),<br>            nn.ReLU(),<br>            nn.Linear(in_features=in_channel//reduction,out_features=in_channel,bias=False),<br>            nn.Sigmoid()<br>        )<br><br>    def forward(self,x):<br>        out=self.pool(x)<br>        out=self.fc(out.view(out.size(0),-1))<br>        out=out.view(x.size(0),x.size(1),1,1)<br>        return out*x<br></code></pre></td></tr></table></figure>
+
+<p><strong>二、ECA（Efficient Channel Attention）</strong><br>ECA注意力机制也是通道注意力的一种方法，该算法是在SE算法的基础上做出了一定的改进，首先ECA作者认为SE虽然全连接的降维可以降低模型的复杂度，但是破坏了通道与其权重之间的直接对应关系，先降维后升维，这样权重和通道的对应关系是间接的，基于上述，作者提出一维卷积的方法，避免了降维对数据的影响。</p>
+<p>该结构主要分为以下三个方面：</p>
+<p>①：通过将特征图进行Squeeze(压缩)，该步骤是通过全局平均池化把特征图从大小为（N,C,H,W)转换为（N,C,1,1)，这样就达到了全局上下文信息的融合，该步骤和SE一样。</p>
+<p>②：计算自适应卷积核的大小，<br> ，其中C为输入的通道数，b&#x3D;1，<br> &#x3D;2，并采用一维卷积计算通道的权重，最后采用Sigmoid激活函数将权重映射在（0-1）之间。</p>
+<p>③：将reshape过后的权重值与原有的特征图做乘法运算（该步骤采用了Python的广播机制），得到不同权重下的特征图。</p>
+<p><img src="https://s2.loli.net/2023/10/12/NhXnP3lx5a7FTvG.png" alt="image.png"></p>
+<p>具体PyTorch实现代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">import torch<br>import torch.nn as nn<br>import math<br>class ECA(nn.Module):<br>    def __init__(self,in_channel,gamma=2,b=1):<br>        super(ECA, self).__init__()<br>        k=int(abs((math.log(in_channel,2)+b)/gamma))<br>        kernel_size=k if k % 2 else k+1<br>        padding=kernel_size//2<br>        self.pool=nn.AdaptiveAvgPool2d(output_size=1)<br>        self.conv=nn.Sequential(<br>            nn.Conv1d(in_channels=1,out_channels=1,kernel_size=kernel_size,padding=padding,bias=False),<br>            nn.Sigmoid()<br>        )<br><br>    def forward(self,x):<br>        out=self.pool(x)<br>        out=out.view(x.size(0),1,x.size(1))<br>        out=self.conv(out)<br>        out=out.view(x.size(0),x.size(1),1,1)<br>        return out*x<br></code></pre></td></tr></table></figure>
+
+<p><strong>三、CBAM（Convolutional Block Attention Module）</strong><br>CBAM注意力机制是一种将通道与空间注意力机制相结合的算法模型，算法整体结构如图3所示，输入特征图先进行通道注意力机制再进行空间注意力机制操作，最后输出，这样从通道和空间两个方面达到了强化感兴趣区域的目的。</p>
+<p>通道结构主要分为以下三个方面：</p>
+<p>①：通过将特征图进行Squeeze(压缩)，该步骤分别采用全局平均池化和全局最大池化把特征图从大小为（N,C,H,W)转换为（N,C,1,1)，这样就达到了全局上下文信息的融合。</p>
+<p>②：分别将全局最大池化和全局平均池化结果进行MLP（多层感知机）操作，MLP在这里定义与SE的操作一样，为两层全连接层，中间采用ReLU激活，最后将两者相加后利用Sigmoid函数激活。</p>
+<p>③：将reshape过后的权重值与原有的特征图做乘法运算（该步骤采用了Python的广播机制），得到不同权重下的特征图。</p>
+<p>空间结构主要分为以下三个方面：</p>
+<p>①：将上述通道注意力操作的结果，分别在通道维度上进行最大池化和平均池化，即将经过通道注意力机制的特征图从（N,C,H,W)转换为（N,1,H,W），达到融合不同通道的信息的效果，然后在通道维度上将最大池化与平均池化结果叠加起来，即采用torch.cat()。</p>
+<p>②：将叠加后2个通道的结果做卷积运算，输出通道为1，卷积核大小为7，最后将输出结果采用Sigmoid函数激活。</p>
+<p>③：将权重值与原有的特征图做乘法运算（该步骤采用了Python的广播机制），得到不同权重下的特征图。</p>
+<p><img src="https://s2.loli.net/2023/10/12/wGMIACQ87LpNdhg.png" alt="image.png"></p>
+<p>代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">import torch<br>import torch.nn as nn<br>import math<br>class CBAM(nn.Module):<br>    def __init__(self,in_channel,reduction=16,kernel_size=7):<br>        super(CBAM, self).__init__()<br>        #通道注意力机制<br>        self.max_pool=nn.AdaptiveMaxPool2d(output_size=1)<br>        self.avg_pool=nn.AdaptiveAvgPool2d(output_size=1)<br>        self.mlp=nn.Sequential(<br>            nn.Linear(in_features=in_channel,out_features=in_channel//reduction,bias=False),<br>            nn.ReLU(),<br>            nn.Linear(in_features=in_channel//reduction,out_features=in_channel,bias=False)<br>        )<br>        self.sigmoid=nn.Sigmoid()<br>        #空间注意力机制<br>        self.conv=nn.Conv2d(in_channels=2,out_channels=1,kernel_size=kernel_size ,stride=1,padding=kernel_size//2,bias=False)<br><br>    def forward(self,x):<br>        #通道注意力机制<br>        maxout=self.max_pool(x)<br>        maxout=self.mlp(maxout.view(maxout.size(0),-1))<br>        avgout=self.avg_pool(x)<br>        avgout=self.mlp(avgout.view(avgout.size(0),-1))<br>        channel_out=self.sigmoid(maxout+avgout)<br>        channel_out=channel_out.view(x.size(0),x.size(1),1,1)<br>        channel_out=channel_out*x<br>        #空间注意力机制<br>        max_out,_=torch.max(channel_out,dim=1,keepdim=True)<br>        mean_out=torch.mean(channel_out,dim=1,keepdim=True)<br>        out=torch.cat((max_out,mean_out),dim=1)<br>        out=self.sigmoid(self.conv(out))<br>        out=out*channel_out<br>        return out<br></code></pre></td></tr></table></figure>
+
+<h1 id="另一利用注意力模块的ODConv：即插即用的动态卷积"><a href="#另一利用注意力模块的ODConv：即插即用的动态卷积" class="headerlink" title="另一利用注意力模块的ODConv：即插即用的动态卷积"></a>另一利用注意力模块的ODConv：即插即用的动态卷积</h1><p>一定程度上讲，ODConv可以视作CondConv的延续，将CondConv中一个维度上的动态特性进行了扩展，同时了考虑了空域、输入通道、输出通道等维度上的动态性，故称之为全维度动态卷积。ODConv通过并行策略采用多维注意力机制沿核空间的四个维度学习互补性注意力。作为一种“即插即用”的操作，它可以轻易的嵌入到现有CNN网络中。ImageNet分类与COCO检测任务上的实验验证了所提ODConv的优异性：即可提升大模型的性能，又可提升轻量型模型的性能</p>
+<p>动态卷积这几年研究的非常多了，比较知名的有谷歌的CondConv，旷视科技的WeightNet、MSRA的DynamicConv、华为的DyNet、商汤的CARAFE等<br>常规卷积只有一个静态卷积核且与输入样本无关。对于动态卷积来说，它对多个卷积核进行线性加权，而加权值则与输入有关，这就使得动态卷积具有输入依赖性。它可以描述如下：<br><img src="https://s2.loli.net/2023/10/12/nTFJOcZfz25ML3K.png" alt="image.png"></p>
+<p><img src="https://s2.loli.net/2023/10/12/CgOm5r9Lqs7TY8K.png" alt="image.png"></p>
+<p><img src="https://s2.loli.net/2023/10/12/mnjYfTA8EikboZx.png" alt="image.png"></p>
+<p>ODConv比一般的动态卷积效果都要好，比一般的注意力机制效果也要好，其实动态卷积与注意力机制是从模块中不同角度进行解析，动态卷积是相比较于常规卷积，最终需要与输入相乘，与输入有关，而常规卷积与输入无关；注意力机制是相对于特征图的四个维度比较的，也即卷积方式不一样，以往是直接进行特征图与卷积核进行卷积来获取特征，而注意力机制就是将特征图分别对四个通道进行压缩，来获取对比某一通道在特征图的影响力，再分别与卷积核进行线性加权，最后与输入相乘。因此像动态卷积与注意力其实一个东西，只是ODConv是考虑到所有维度的注意力，因此效果最好</p>
+<p>参考链接：<a href="https://zhuanlan.zhihu.com/p/468466504">https://zhuanlan.zhihu.com/p/468466504</a></p>
+<h1 id="5-在yolov5中添加ODConv"><a href="#5-在yolov5中添加ODConv" class="headerlink" title="5.在yolov5中添加ODConv"></a>5.在yolov5中添加ODConv</h1><p><strong>1.首先在common.py文件中添加代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext"><br>import torch<br>import torch.nn as nn<br>import torch.nn.functional as F<br>import torch.autograd<br><br>class ODConv(nn.Sequential):<br>    def __init__(self, in_planes, out_planes, kernel_size=3, stride=1, groups=1, norm_layer=nn.BatchNorm2d,<br>                 reduction=0.0625, kernel_num=1):<br>        padding = (kernel_size - 1) // 2<br>        super(ODConv, self).__init__(<br>            ODConv2d(in_planes, out_planes, kernel_size, stride, padding, groups=groups,<br>                     reduction=reduction, kernel_num=kernel_num),<br>            norm_layer(out_planes),<br>            nn.SiLU()<br>        )<br><br>class Attention(nn.Module):<br>    def __init__(self, in_planes, out_planes, kernel_size, <br>    groups=1, <br>    reduction=0.0625, <br>    kernel_num=4, <br>    min_channel=16):<br>        super(Attention, self).__init__()<br>        attention_channel = max(int(in_planes * reduction), min_channel)<br>        self.kernel_size = kernel_size<br>        self.kernel_num = kernel_num<br>        self.temperature = 1.0<br><br>        self.avgpool = nn.AdaptiveAvgPool2d(1)<br>        self.fc = nn.Conv2d(in_planes, attention_channel, 1, bias=False)<br>        self.bn = nn.BatchNorm2d(attention_channel)<br>        self.relu = nn.ReLU(inplace=True)<br><br>        self.channel_fc = nn.Conv2d(attention_channel, in_planes, 1, bias=True)<br>        self.func_channel = self.get_channel_attention<br><br>        if in_planes == groups and in_planes == out_planes:  # depth-wise convolution<br>            self.func_filter = self.skip<br>        else:<br>            self.filter_fc = nn.Conv2d(attention_channel, out_planes, 1, bias=True)<br>            self.func_filter = self.get_filter_attention<br><br>        if kernel_size == 1:  # point-wise convolution<br>            self.func_spatial = self.skip<br>        else:<br>            self.spatial_fc = nn.Conv2d(attention_channel, kernel_size * kernel_size, 1, bias=True)<br>            self.func_spatial = self.get_spatial_attention<br><br>        if kernel_num == 1:<br>            self.func_kernel = self.skip<br>        else:<br>            self.kernel_fc = nn.Conv2d(attention_channel, kernel_num, 1, bias=True)<br>            self.func_kernel = self.get_kernel_attention<br>        self.bn_1 = nn.LayerNorm([attention_channel,1,1])<br>        self._initialize_weights()<br><br>    def _initialize_weights(self):<br>        for m in self.modules():<br>            if isinstance(m, nn.Conv2d):<br>                nn.init.kaiming_normal_(m.weight, mode=&#x27;fan_out&#x27;, nonlinearity=&#x27;relu&#x27;)<br>                if m.bias is not None:<br>                    nn.init.constant_(m.bias, 0)<br>            if isinstance(m, nn.BatchNorm2d):<br>                nn.init.constant_(m.weight, 1)<br>                nn.init.constant_(m.bias, 0)<br><br>    def update_temperature(self, temperature):<br>        self.temperature = temperature<br><br>    @staticmethod<br>    def skip(_):<br>        return 1.0<br><br>    def get_channel_attention(self, x):<br>        channel_attention = torch.sigmoid(self.channel_fc(x).view(x.size(0), -1, 1, 1) / self.temperature)<br>        return channel_attention<br><br>    def get_filter_attention(self, x):<br>        filter_attention = torch.sigmoid(self.filter_fc(x).view(x.size(0), -1, 1, 1) / self.temperature)<br>        return filter_attention<br><br>    def get_spatial_attention(self, x):<br>        spatial_attention = self.spatial_fc(x).view(x.size(0), 1, 1, 1, self.kernel_size, self.kernel_size)<br>        spatial_attention = torch.sigmoid(spatial_attention / self.temperature)<br>        return spatial_attention<br><br>    def get_kernel_attention(self, x):<br>        kernel_attention = self.kernel_fc(x).view(x.size(0), -1, 1, 1, 1, 1)<br>        kernel_attention = F.softmax(kernel_attention / self.temperature, dim=1)<br>        return kernel_attention<br><br>    def forward(self, x):<br>        x = self.avgpool(x)<br>        x = self.fc(x)<br>        x = self.bn_1(x)<br>        x = self.relu(x)<br>        return self.func_channel(x), self.func_filter(x), self.func_spatial(x), self.func_kernel(x)<br><br>class ODConv2d(nn.Module):<br>    def __init__(self, <br>    in_planes, <br>    out_planes, <br>    kernel_size=3, <br>    stride=1, <br>    padding=0, <br>    dilation=1, <br>    groups=1,<br>    reduction=0.0625, <br>    kernel_num=1):<br>        super(ODConv2d, self).__init__()<br>        self.in_planes = in_planes<br>        self.out_planes = out_planes<br>        self.kernel_size = kernel_size<br>        self.stride = stride<br>        self.padding = padding<br>        self.dilation = dilation<br>        self.groups = groups<br>        self.kernel_num = kernel_num<br>        self.attention = Attention(in_planes, out_planes, kernel_size, groups=groups,<br>                                   reduction=reduction, kernel_num=kernel_num)<br>        self.weight = nn.Parameter(torch.randn(kernel_num, out_planes, in_planes//groups, kernel_size, kernel_size),<br>                                   requires_grad=True)<br>        self._initialize_weights()<br><br>        if self.kernel_size == 1 and self.kernel_num == 1:<br>            self._forward_impl = self._forward_impl_pw1x<br>        else:<br>            self._forward_impl = self._forward_impl_common<br><br>    def _initialize_weights(self):<br>        for i in range(self.kernel_num):<br>            nn.init.kaiming_normal_(self.weight[i], mode=&#x27;fan_out&#x27;, nonlinearity=&#x27;relu&#x27;)<br><br>    def update_temperature(self, temperature):<br>        self.attention.update_temperature(temperature)<br><br>    def _forward_impl_common(self, x):<br><br>        channel_attention, filter_attention, spatial_attention, kernel_attention = self.attention(x)<br>        batch_size, in_planes, height, width = x.size()<br>        x = x * channel_attention<br>        x = x.reshape(1, -1, height, width)<br>        aggregate_weight = spatial_attention * kernel_attention * self.weight.unsqueeze(dim=0)<br>        aggregate_weight = torch.sum(aggregate_weight, dim=1).view(<br>            [-1, self.in_planes // self.groups, self.kernel_size, self.kernel_size])<br>        output = F.conv2d(x, weight=aggregate_weight, bias=None, stride=self.stride, padding=self.padding,<br>                          dilation=self.dilation, groups=self.groups * batch_size)<br>        output = output.view(batch_size, self.out_planes, output.size(-2), output.size(-1))<br>        output = output * filter_attention<br>        return output<br><br>    def _forward_impl_pw1x(self, x):<br>        channel_attention, filter_attention, spatial_attention, kernel_attention = self.attention(x)<br>        x = x * channel_attention<br>        output = F.conv2d(x, weight=self.weight.squeeze(dim=0), bias=None, stride=self.stride, padding=self.padding,<br>                          dilation=self.dilation, groups=self.groups)<br>        output = output * filter_attention<br>        return output<br><br>    def forward(self, x):<br>        return self._forward_impl(x)<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>2.在yolo.py文件中添加对应的CBAM</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">elif m in [ODConv]:<br>    c1, c2 = ch[f], args[0]<br>    if c2 != no:  # if not output<br>        c2 = make_divisible(c2 * gw, 8)<br><br>    args = [c1, c2, *args[1:]]<br></code></pre></td></tr></table></figure>
+
+<p>在yolov5.yaml文件中则需要除了backbone网络中第一个卷积之外，其它卷积都可以替换为ODConv<br>例如替换head中一个卷积conv</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">head:<br>  [[-1, 1, Conv, [512, 1, 1]],<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]],<br>   [[-1, 6], 1, Concat, [1]],  # cat backbone P4<br>   [-1, 3, C3, [512, False]],  # 13<br><br>   [-1, 1, Conv, [256, 1, 1]],<br>   [-1, 1, nn.Upsample, [None, 2, &#x27;nearest&#x27;]],<br>   [[-1, 4], 1, Concat, [1]],  # cat backbone P3<br>   [-1, 3, C3, [256, False]],  # 17 (P3/8-small)<br><br>   [-1, 1, Conv, [256, 3, 2]],<br>   [[-1, 14], 1, Concat, [1]],  # cat head P4<br>   [-1, 3, C3, [512, False]],  # 20 (P4/16-medium)<br><br>   [-1, 1, ODConv, [512, 3, 2]],<br>   [[-1, 10], 1, Concat, [1]],  # cat head P5<br>   [-1, 3, C3, [1024, False]],  # 23 (P5/32-large)<br><br>   [[17, 20, 23], 1, Detect, [nc, anchors]],  # Detect(P3, P4, P5)<br>  ]<br></code></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>-yolov5 -head -CBAM -ODConv</tag>
       </tags>
   </entry>
 </search>
